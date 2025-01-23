@@ -15,13 +15,13 @@ public class GameManager : MonoBehaviour
     public float playerBounce;
 
     [Header("Scene Fields")]
-    [SerializeField] private GameObject[] waypoints;
+    public GameObject[] waypoints;
 
     [Header("Debug Fields")]
-    [SerializeField] private bool debugSpawnWaves;
-    [SerializeField] private bool debugSpawnPortal;
-    [SerializeField] private bool debugSpawnPowerUp;
-    [SerializeField] private bool debugPowerUpRepel;
+    public bool debugSpawnWaves;
+    public bool debugSpawnPortal;
+    public bool debugSpawnPowerUp;
+    public bool debugPowerUpRepel;
 
     public bool switchLevels { get; private set; }
     public bool gameOver { get; private set; }
