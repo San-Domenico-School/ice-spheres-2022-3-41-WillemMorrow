@@ -394,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iceSphere: {fileID: 4048181934749440839, guid: dedf5281bcaa3264aa3daa47757e272e,
     type: 3}
-  portal: {fileID: 1742899641471652, guid: 6aed649864726473582ea78d2e649233, type: 3}
+  portal: {fileID: 5186144695269527295}
   powerUp: {fileID: 0}
   initialWave: 1
   increaseEachWave: 1
@@ -1051,6 +1051,12 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 2280b435f4525254ea71aec056f00d0f, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &5186144695269527295 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5789162223711880075, guid: 6aed649864726473582ea78d2e649233,
+    type: 3}
+  m_PrefabInstance: {fileID: 8621646804641457458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7305732181041295649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1129,6 +1135,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 363a8f737719f4d2eafb35f885f3706f, type: 3}
+--- !u!1001 &8621646804641457458
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424960684412753478, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789162223711880075, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_Name
+      value: PortalRing_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789162223711880075, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6aed649864726473582ea78d2e649233, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1141,3 +1220,4 @@ SceneRoots:
   - {fileID: 66019064}
   - {fileID: 1314744512}
   - {fileID: 696843050}
+  - {fileID: 8621646804641457458}

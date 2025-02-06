@@ -53,6 +53,11 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnIceWave();
         }
+
+        if (waveNumber > portalFirstAppearence || GameManager.Singleton.debugSpawnPortal && (portal.activeInHierarchy == false))
+        {
+            SetObjActive(portal, portalByWaveProbability);
+        }
     }
 
     private void SpawnIceWave()
@@ -74,19 +79,42 @@ public class SpawnManager : MonoBehaviour
 
     private void SetObjActive(GameObject obj, float waveProbability)
     {
-
+        if (Random.value < waveNumber * waveProbability * Time.deltaTime || GameManager.Singleton.debugSpawnPortal)
+        {
+            obj.transform.position = SetRandomPosition(obj.transform.position.y);
+            StartCoroutine(CountdownTimer(obj.tag));
+        }
     }
 
     private Vector3 SetRandomPosition(float posY)
     {
         float posX = Random.Range(-(islandSize.x/2), (islandSize.x/2));
-        float posZ = Random.Range(-(islandSize.y/2), (islandSize.y/2));
+        float posZ = Random.Range(-(islandSize.z/2), (islandSize.z/2));
 
         return new Vector3(posX, posY, posZ);
     }
 
     IEnumerator CountdownTimer(string objectTag)
     {
-        yield return new WaitForSeconds(1.0f);
+        float byWaveDuration = 0;
+
+        switch (objectTag)
+        {
+            case "Portal":
+                portal.SetActive(true);
+                portalActive = true;
+                byWaveDuration = portalByWaveDuration;
+                break;
+        }
+
+        yield return new WaitForSeconds(waveNumber * byWaveDuration);
+
+        switch (objectTag)
+        {
+            case "Portal":
+                portal.SetActive(false);
+                portalActive = false;
+                break;
+        }
     }
 }

@@ -36,7 +36,7 @@ public class PowerInteractor : MonoBehaviour
 
             if (playerControlerScript.hasPowerUp)
             {
-                iceRb.AddForce(-directionToPlayer * playerRB.mass * GameManager.Singleton.playerRepelForce, ForceMode.Impulse);
+                iceRb.AddForce(-directionToPlayer * iceRb.mass * GameManager.Singleton.playerRepelForce, ForceMode.Impulse);
             }
 
             else
