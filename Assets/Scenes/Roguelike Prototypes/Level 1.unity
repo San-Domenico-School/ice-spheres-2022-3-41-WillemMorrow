@@ -466,7 +466,7 @@ MonoBehaviour:
   playerMass: 10
   playerDrag: 0.7
   playerMoveForce: 35
-  playerRepelForce: 0.75
+  playerRepelForce: 5
   playerBounce: 0.75
   waypoints: []
   debugSpawnWaves: 0

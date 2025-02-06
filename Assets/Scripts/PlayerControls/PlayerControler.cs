@@ -35,6 +35,8 @@ public class PlayerControler : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
+        hasPowerUp = GameManager.Singleton.debugPowerUpRepel;
+
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<SphereCollider>();
         powerUpIndicator = GetComponent<Light>();
