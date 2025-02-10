@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /*******************************************
  * Class responsible for controling the player & administering powerups.
@@ -48,6 +50,15 @@ public class PlayerControler : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+
+        if (transform.position.y < -10)
+        {
+            IslandManager.Singleton.SwitchLevels("Island1");
+            DelayAssignLevelValues();
+            
+            transform.position = Vector3.up * 25;
+            rb.velocity = Vector3.zero;
+        }
     }
 
     private void OnEnable()
@@ -65,6 +76,7 @@ public class PlayerControler : MonoBehaviour
     private void SetMoveDirection(Vector2 value)
     {
         moveDirection = value.y;
+
     }
 
     // assigns the player's values with those of the GameManager for the current level
@@ -75,7 +87,6 @@ public class PlayerControler : MonoBehaviour
         rb.drag = GameManager.Singleton.playerDrag;
         moveForceMagnitude = GameManager.Singleton.playerMoveForce;
         focalPoint = (GameObject.Find("FocalPoint").transform);
-
     }
 
     private void Move()
@@ -83,6 +94,12 @@ public class PlayerControler : MonoBehaviour
         if (focalPoint != null)
         {
             rb.AddForce(focalPoint.forward.normalized * moveDirection * moveForceMagnitude * Time.deltaTime);
+            Debug.Log($"Focalpoint = {focalPoint.gameObject.name}; moveDirection = {moveDirection}; moveForceMagnitude = {moveForceMagnitude}");
+        }
+        
+        else
+        {
+            focalPoint = (GameObject.Find("FocalPoint").transform);
         }
     }
 
@@ -97,16 +114,40 @@ public class PlayerControler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Portal"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Portal");
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Portal"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
+
+            // If, when the player leaves the portal, it is under the portal, IE it has gone through the portal
+            if (transform.position.y < -1.0f)
+            {
+                string portalDestination = other.GetComponent<PortalController>().GetDestination();
+                IslandManager.Singleton.SwitchLevels(portalDestination);
+                DelayAssignLevelValues();
+                
+                rb.velocity = Vector3.zero;
+                transform.position = Vector3.up * 25;
+            }
+        }
     }
 
     private IEnumerator powerUpCooldown(float cooldown)
     {
         yield return new WaitForSeconds(cooldown);
+    }
+
+    private IEnumerator DelayAssignLevelValues()
+    {
+        yield return new WaitForFixedUpdate();
+
+        AssignLevelValues();
     }
 }

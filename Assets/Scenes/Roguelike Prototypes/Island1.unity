@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &15892414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15892416}
+  - component: {fileID: 15892415}
+  m_Layer: 0
+  m_Name: IslandManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &15892415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15892414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d6a764a216a5f4f828c5582a3b0028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &15892416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15892414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.20927, y: -14.634933, z: -10.755386}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &66019063
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,9 +514,9 @@ MonoBehaviour:
   playerBounce: 0.75
   waypoints: []
   debugSpawnWaves: 0
-  debugSpawnPortal: 0
+  debugSpawnPortal: 1
   debugSpawnPowerUp: 0
-  debugPowerUpRepel: 0
+  debugPowerUpRepel: 1
 --- !u!1 &1211016355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,6 +1101,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8621646804641457458}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5186144695269527297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186144695269527295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6d985b48faaab49999acbcf9a2485e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: Island2
 --- !u!1001 &7305732181041295649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1206,7 +1263,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5789162223711880075, guid: 6aed649864726473582ea78d2e649233,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5186144695269527297}
   m_SourcePrefab: {fileID: 100100000, guid: 6aed649864726473582ea78d2e649233, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -1221,3 +1282,4 @@ SceneRoots:
   - {fileID: 1314744512}
   - {fileID: 696843050}
   - {fileID: 8621646804641457458}
+  - {fileID: 15892416}
