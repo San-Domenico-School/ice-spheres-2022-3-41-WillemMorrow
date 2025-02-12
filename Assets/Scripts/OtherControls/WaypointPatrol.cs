@@ -32,5 +32,10 @@ public class WaypointPatrol : MonoBehaviour
         {
             waypointIndex++;
         }
+
+        if (waypointIndex >= waypoints.Length)
+        {
+            waypointIndex = 0;
+        }
     }
 }

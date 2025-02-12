@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /************************************************
- * class responsible for interacting with the player's powerup?
+ * class responsible for determining who is pushed; player or IceSphere
  * 
  * component of IceSphere
  * 

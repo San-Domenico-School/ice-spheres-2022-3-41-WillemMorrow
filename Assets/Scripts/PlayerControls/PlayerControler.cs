@@ -108,6 +108,7 @@ public class PlayerControler : MonoBehaviour
         if (other.gameObject.CompareTag("Startup"))
         {
             other.gameObject.tag = ("Ground");
+            other.gameObject.layer = (7);
             playerCollider.material.bounciness = GameManager.Singleton.playerBounce;
         }
     }
@@ -117,6 +118,16 @@ public class PlayerControler : MonoBehaviour
         if (other.gameObject.CompareTag("Portal"))
         {
             gameObject.layer = LayerMask.NameToLayer("Portal");
+        }
+
+        if (other.gameObject.CompareTag("PowerUp"))
+        {
+            PowerUpControler otherPowerUpControler = other.GetComponent<PowerUpControler>();
+            float otherPowerUpCooldown = otherPowerUpControler.GetCooldown();
+
+            powerUpCooldown(otherPowerUpCooldown);
+
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -141,7 +152,13 @@ public class PlayerControler : MonoBehaviour
 
     private IEnumerator powerUpCooldown(float cooldown)
     {
+        hasPowerUp = true;
+        powerUpIndicator.intensity = 3.5f;
+
         yield return new WaitForSeconds(cooldown);
+
+        hasPowerUp = false;
+        powerUpIndicator.intensity = 0.0f;
     }
 
     private IEnumerator DelayAssignLevelValues()

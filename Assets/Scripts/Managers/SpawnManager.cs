@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
 /***************************************
- * Manages the game
+ * Manages the spawning of objects
  * 
- * Component of: GameManager
+ * Component of: SpawnManager
  * 
  * Pacifica Morrow
  * 01.16.2025
@@ -29,6 +30,11 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int portalFirstAppearence;
     [SerializeField] private float portalByWaveProbability;
     [SerializeField] private float portalByWaveDuration;
+
+    [Header("Power-Up Fields")]
+    [SerializeField] private int powerUpFirstAppearence;
+    [SerializeField] private float powerUpByWaveProbability;
+    [SerializeField] private float powerUpByWaveDuration;
 
     [Header("Island")]
     [SerializeField] private GameObject island;
@@ -63,6 +69,12 @@ public class SpawnManager : MonoBehaviour
         {
             SetObjActive(portal, portalByWaveProbability);
         }
+
+        if (waveNumber > powerUpFirstAppearence || GameManager.Singleton.debugSpawnPowerUp && (powerUp.activeInHierarchy == false) && (powerUp != null))
+        {
+            SetObjActive(powerUp, powerUpByWaveProbability);
+        }
+
     }
 
     private void SpawnIceWave()
@@ -110,6 +122,12 @@ public class SpawnManager : MonoBehaviour
                 portalActive = true;
                 byWaveDuration = portalByWaveDuration;
                 break;
+
+            case "PowerUp":
+                powerUp.SetActive(true);
+                powerUpActive = true;
+                byWaveDuration = powerUpByWaveDuration;
+                break;
         }
 
         yield return new WaitForSeconds(waveNumber * byWaveDuration);
@@ -120,6 +138,12 @@ public class SpawnManager : MonoBehaviour
                 portal.SetActive(false);
                 portalActive = false;
                 break;
+
+            case "PowerUp":
+                powerUp.SetActive(false);
+                powerUpActive = false;
+                break;
         }
+
     }
 }
