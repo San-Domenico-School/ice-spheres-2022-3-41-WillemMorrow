@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e35e058cfa7d2f44a9405bb3db0f2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScale: {x: 0, y: 0, z: 0}
+  playerScale: {x: 1.25, y: 1.25, z: 1.25}
   playerMass: 10
   playerDrag: 0.2
   playerMoveForce: 150
@@ -1126,7 +1126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1301643505922104, guid: 961be46ca9a355943ae3f65c47741bb0, type: 3}
       propertyPath: m_TagString
@@ -1416,6 +1416,11 @@ PrefabInstance:
     - target: {fileID: 4758555946733452, guid: 9e928de923724f54ea836e735efdd8b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410572835557578778, guid: 9e928de923724f54ea836e735efdd8b6,
+        type: 3}
+      propertyPath: cooldown
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

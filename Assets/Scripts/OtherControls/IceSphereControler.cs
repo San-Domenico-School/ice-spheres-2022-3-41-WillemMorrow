@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/***********************************************
+ * Handles setting the random size of the IceSpheres and melts them.
+ * 
+ * Component of IceSphere
+ * 
+ * Pacifica Morrow
+ * 02.14.2025
+ * ********************************************/
+
+
 public class IceSphereControler : MonoBehaviour
 {
     private float startDelay;

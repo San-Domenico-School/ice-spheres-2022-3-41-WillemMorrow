@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.InputSystem;
 
 /*******************************************
  * Class responsible for controling the player & administering powerups.
@@ -17,20 +18,13 @@ public class PlayerControler : MonoBehaviour
 {
     [SerializeField] private float moveForceMagnitude;
     [SerializeField] private Transform focalPoint;
+    [SerializeField] private Light powerUpIndicator;
 
     private Rigidbody rb;
     private SphereCollider playerCollider;
-    private Light powerUpIndicator;
     private PlayerInputActions playerInputActions;
     private float moveDirection;
     public bool hasPowerUp {  get; private set; }
-
-
-    private void Awake()
-    {
-        playerInputActions = new PlayerInputActions();
-
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +37,6 @@ public class PlayerControler : MonoBehaviour
         playerCollider = GetComponent<SphereCollider>();
         powerUpIndicator = GetComponent<Light>();
         playerCollider.material.bounciness = 0.4f;
-        powerUpIndicator.intensity = 0.0f;
     }
 
     // Update is called once per frame
@@ -54,7 +47,6 @@ public class PlayerControler : MonoBehaviour
         if (transform.position.y < -10)
         {
             IslandManager.Singleton.SwitchLevels("Island1");
-            DelayAssignLevelValues();
             
             transform.position = Vector3.up * 25;
             rb.velocity = Vector3.zero;
@@ -63,20 +55,20 @@ public class PlayerControler : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInputActions.Player.Enable();
-        playerInputActions.Player.Movement.performed += ctx => { SetMoveDirection(ctx.ReadValue<Vector2>()); };
-        playerInputActions.Player.Movement.canceled += ctx => { moveDirection = 0.0f; };
+        GameObject player = this.gameObject;
+        player.name = "player";
+
+        Renderer renderer = player.GetComponentInChildren<Renderer>();
+        renderer.material.color = player.GetComponent<ColorPicker>().GetColor();
+
     }
 
-    private void OnDisable()
-    {
-        playerInputActions.Player.Disable();
-    }
+    public void OnInputAction(InputAction.CallbackContext ctx) => SetMoveDirection(ctx.ReadValue<Vector2>());
 
     private void SetMoveDirection(Vector2 value)
     {
         moveDirection = value.y;
-
+        Debug.Log($"value.y");
     }
 
     // assigns the player's values with those of the GameManager for the current level
@@ -85,8 +77,10 @@ public class PlayerControler : MonoBehaviour
         transform.localScale = GameManager.Singleton.playerScale;
         rb.mass = GameManager.Singleton.playerMass;
         rb.drag = GameManager.Singleton.playerDrag;
-        moveForceMagnitude = GameManager.Singleton.playerMoveForce;
+        moveForceMagnitude = (GameManager.Singleton.playerMoveForce) * 10;
         focalPoint = (GameObject.Find("FocalPoint").transform);
+
+        Debug.Log($"{rb.mass}, {rb.drag}, {moveForceMagnitude}, {focalPoint.name}");
     }
 
     private void Move()
@@ -94,7 +88,6 @@ public class PlayerControler : MonoBehaviour
         if (focalPoint != null)
         {
             rb.AddForce(focalPoint.forward.normalized * moveDirection * moveForceMagnitude * Time.deltaTime);
-            Debug.Log($"Focalpoint = {focalPoint.gameObject.name}; moveDirection = {moveDirection}; moveForceMagnitude = {moveForceMagnitude}");
         }
         
         else
@@ -105,10 +98,9 @@ public class PlayerControler : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Startup"))
+        if (other.gameObject.CompareTag("Ground"))
         {
-            other.gameObject.tag = ("Ground");
-            other.gameObject.layer = (7);
+            AssignLevelValues();
             playerCollider.material.bounciness = GameManager.Singleton.playerBounce;
         }
     }
@@ -125,7 +117,8 @@ public class PlayerControler : MonoBehaviour
             PowerUpControler otherPowerUpControler = other.GetComponent<PowerUpControler>();
             float otherPowerUpCooldown = otherPowerUpControler.GetCooldown();
 
-            powerUpCooldown(otherPowerUpCooldown);
+            
+            StartCoroutine(powerUpCooldown(otherPowerUpCooldown));
 
             other.gameObject.SetActive(false);
         }
@@ -142,7 +135,6 @@ public class PlayerControler : MonoBehaviour
             {
                 string portalDestination = other.GetComponent<PortalController>().GetDestination();
                 IslandManager.Singleton.SwitchLevels(portalDestination);
-                DelayAssignLevelValues();
                 
                 rb.velocity = Vector3.zero;
                 transform.position = Vector3.up * 25;
@@ -152,19 +144,13 @@ public class PlayerControler : MonoBehaviour
 
     private IEnumerator powerUpCooldown(float cooldown)
     {
+        Debug.Log("Ienumerator PowerUpCooldown Activated!");
         hasPowerUp = true;
-        powerUpIndicator.intensity = 3.5f;
+        powerUpIndicator.intensity = 5.0f;
 
         yield return new WaitForSeconds(cooldown);
 
         hasPowerUp = false;
         powerUpIndicator.intensity = 0.0f;
-    }
-
-    private IEnumerator DelayAssignLevelValues()
-    {
-        yield return new WaitForFixedUpdate();
-
-        AssignLevelValues();
     }
 }

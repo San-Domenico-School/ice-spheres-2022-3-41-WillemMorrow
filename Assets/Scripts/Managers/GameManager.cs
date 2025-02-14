@@ -2,9 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*****************************************************
+ * Manages the game.
+ * 
+ * Component of GameManager singleton
+ * 
+ * Pacifica Morrow
+ * 02.14.2025
+ * **************************************************/
+
+
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Singleton;
+    public static GameManager Singleton; //public reference to a level's GameManager.
 
     [Header("Player Fields")]
     public Vector3 playerScale;
@@ -30,7 +41,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Awake is called before any Start methods are called
         //If instance variable doesn't exist, assign this object to it
         if (Singleton == null)
         {

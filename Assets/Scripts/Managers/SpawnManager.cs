@@ -60,7 +60,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
 
-        if ((FindObjectsOfType<IceSphereControler>().Length == 0.0f) && (GameObject.Find("Player")))
+        if ((FindObjectsOfType<IceSphereControler>().Length == 0.0f) && (GameObject.Find("player")))
         {
             SpawnIceWave();
         }
@@ -70,9 +70,12 @@ public class SpawnManager : MonoBehaviour
             SetObjActive(portal, portalByWaveProbability);
         }
 
-        if (waveNumber > powerUpFirstAppearence || GameManager.Singleton.debugSpawnPowerUp && (powerUp.activeInHierarchy == false) && (powerUp != null))
+        if (powerUp != null)
         {
-            SetObjActive(powerUp, powerUpByWaveProbability);
+            if (waveNumber > powerUpFirstAppearence || GameManager.Singleton.debugSpawnPowerUp && (powerUp.activeInHierarchy == false))
+            {
+                SetObjActive(powerUp, powerUpByWaveProbability);
+            }
         }
 
     }
@@ -82,8 +85,6 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < (waveNumber + increaseEachWave);)
         {
             Instantiate(iceSphere, SetRandomPosition(0), iceSphere.transform.rotation);
-
-            Debug.Log("i = " + i + "; waveNumber == " + waveNumber + "; NumSpawned == " + (waveNumber + increaseEachWave));
 
             if (1 <= maximumWave)
             {

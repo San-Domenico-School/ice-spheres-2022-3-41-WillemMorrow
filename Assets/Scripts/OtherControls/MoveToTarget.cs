@@ -21,7 +21,7 @@ public class MoveToTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("Player");
+        target = GameObject.Find("player");
         targetRb = target.GetComponent<Rigidbody>();
     }
 

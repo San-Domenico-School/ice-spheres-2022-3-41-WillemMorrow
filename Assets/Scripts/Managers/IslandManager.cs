@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*************************************************
+ * Class responsible for switching levels.
+ * 
+ * Component of the IslandManager
+ * 
+ * Pacifica Morrow
+ * 02.14.2025
+ * **********************************************/
+
 public class IslandManager : MonoBehaviour
 {
     public static IslandManager Singleton;

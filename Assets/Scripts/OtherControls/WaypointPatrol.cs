@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+/***********************************************
+ * Sets the NavMeshAgent of an IceSphere to navigate around a set of waypoints.
+ * 
+ * component of IceSphere
+ * 
+ * Pacifica Morrow
+ * 02.14.2025
+ * ********************************************/
+
 public class WaypointPatrol : MonoBehaviour
 {
     private GameObject[] waypoints;
