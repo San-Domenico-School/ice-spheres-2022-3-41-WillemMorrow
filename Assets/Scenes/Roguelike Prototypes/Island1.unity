@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae5650481185b84fbb71ea9050adf0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 50
+  rotationSpeed: 0
 --- !u!1001 &245963551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -420,7 +420,7 @@ MonoBehaviour:
   playerRepelForce: 5
   playerBounce: 0.75
   waypoints: []
-  debugSpawnWaves: 1
+  debugSpawnWaves: 0
   debugSpawnPortal: 0
   debugSpawnPowerUp: 0
   debugPowerUpRepel: 0
@@ -828,6 +828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924647975}
   - component: {fileID: 1924647974}
+  - component: {fileID: 1924647976}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -848,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 0
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
@@ -860,16 +861,24 @@ MonoBehaviour:
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 2db99756-1a0e-4acb-a5ef-3c62d727128f
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: e54eb1b0-5693-4e9f-91bf-c7888d59a4ea
+        m_Path: 
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 8724788596557560788, guid: 71316d2d4a7953a47b4c1fda9121a030,
+  m_PlayerPrefab: {fileID: 239099382533575094, guid: 2a77f3136a695c043a336a5f91c02c09,
     type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
@@ -895,6 +904,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1924647976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924647973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba077ace2e27863419a1548d85e87b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 0, g: 0.03532815, b: 1, a: 0}
+  - {r: 1, g: 0, b: 0.87590456, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0.028020116, g: 0.7264151, b: 0, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &5186144695269527295 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5789162223711880075, guid: 6aed649864726473582ea78d2e649233,

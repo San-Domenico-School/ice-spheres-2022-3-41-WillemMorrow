@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
+using TMPro;
 
 /*******************************************
  * Class responsible for controling the player & administering powerups.
@@ -21,22 +22,25 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private Light powerUpIndicator;
 
     private Rigidbody rb;
+    private GameObject player;
     private SphereCollider playerCollider;
     private PlayerInputActions playerInputActions;
-    private float moveDirection;
+    private Vector2 moveVector;
     public bool hasPowerUp {  get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
         hasPowerUp = GameManager.Singleton.debugPowerUpRepel;
 
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<SphereCollider>();
         powerUpIndicator = GetComponent<Light>();
         playerCollider.material.bounciness = 0.4f;
+
+        player = this.gameObject;
+
+        player.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,29 +50,22 @@ public class PlayerControler : MonoBehaviour
 
         if (transform.position.y < -10)
         {
-            IslandManager.Singleton.SwitchLevels("Island1");
-            
-            transform.position = Vector3.up * 25;
-            rb.velocity = Vector3.zero;
+            // IMPLIMENT PLAYER DEATH
         }
     }
 
     private void OnEnable()
     {
-        GameObject player = this.gameObject;
-        player.name = "player";
-
-        Renderer renderer = player.GetComponentInChildren<Renderer>();
-        renderer.material.color = player.GetComponent<ColorPicker>().GetColor();
-
+        
     }
 
-    public void OnInputAction(InputAction.CallbackContext ctx) => SetMoveDirection(ctx.ReadValue<Vector2>());
+    // called by the Player Input component of the player, sets the player's moveVector to the value of the movement keys via calling SetMoveVector.
+    public void OnInputAction(InputAction.CallbackContext ctx) => SetMoveVector(ctx.ReadValue<Vector2>());
 
-    private void SetMoveDirection(Vector2 value)
+    private void SetMoveVector(Vector2 value)
     {
-        moveDirection = value.y;
-        Debug.Log($"value.y");
+        moveVector = value;
+        Debug.Log("63: " + moveVector);
     }
 
     // assigns the player's values with those of the GameManager for the current level
@@ -87,12 +84,15 @@ public class PlayerControler : MonoBehaviour
     {
         if (focalPoint != null)
         {
-            rb.AddForce(focalPoint.forward.normalized * moveDirection * moveForceMagnitude * Time.deltaTime);
+            rb.AddForce((focalPoint.forward.normalized * moveVector.y) * moveForceMagnitude * Time.deltaTime);
+            rb.AddForce((focalPoint.right.normalized * moveVector.x) * moveForceMagnitude * Time.deltaTime);
+            Debug.Log($"Movement vector = {moveVector}");
         }
-        
+
         else
         {
-            focalPoint = (GameObject.Find("FocalPoint").transform);
+            focalPoint = GameObject.Find("FocalPoint").transform;
+            Debug.Log($"focalpoint = {focalPoint.name}");
         }
     }
 
@@ -144,7 +144,6 @@ public class PlayerControler : MonoBehaviour
 
     private IEnumerator powerUpCooldown(float cooldown)
     {
-        Debug.Log("Ienumerator PowerUpCooldown Activated!");
         hasPowerUp = true;
         powerUpIndicator.intensity = 5.0f;
 

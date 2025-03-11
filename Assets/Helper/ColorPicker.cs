@@ -13,16 +13,19 @@ using UnityEngine;
 
 public class ColorPicker : MonoBehaviour
 {
-    private Color[] colors; //array to hold the available colors
-    private int colorIndex; //Index for the color array
+    [SerializeField] private Color[] colors; //array to hold the available colors
+    private static int colorIndex; //Index for the color array
 
-    public Color GetColor()
+    public Color GetColor(int desiredColorIndex)
     {
+        /***************************
+        OUTDATED -- system for cycling through the colors whenever a player joins.
+        
         // gets a local int of the colorIndex before colorIndex is changed
         int returnColorIndex = colorIndex;
 
         // changes the colorIndex to cycle to the next color, if the index is less than the length of color.
-        if (colorIndex > colors.Length)
+        if (colorIndex < colors.Length)
         {
             colorIndex++;
         }
@@ -31,8 +34,9 @@ public class ColorPicker : MonoBehaviour
         {
             colorIndex = 0;
         }
-        
+        ******************************/
+
         // returns the original colorIndex before it was modified, via the local variable
-        return colors[returnColorIndex];
+        return colors[desiredColorIndex];
     }
 }

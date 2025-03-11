@@ -14,22 +14,22 @@ using UnityEngine;
 public class FocalPointRotator : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
-    private PlayerInputActions playerInputActions;
+    //private PlayerInputActions playerInputActions;
     private float moveDirection;
 
     // Start is called before the first frame update
-    void Awake()
+    /*void Awake()
     {
         playerInputActions = new PlayerInputActions();
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up, moveDirection * rotationSpeed * Time.deltaTime * (-1.0f));
+        transform.Rotate(Vector3.up, /*moveDirection*/  rotationSpeed * Time.deltaTime * (-1.0f));
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         playerInputActions.Player.Enable();
         playerInputActions.Player.Movement.performed += ctx => { CameraRotate(ctx.ReadValue<Vector2>()); };
@@ -44,5 +44,5 @@ public class FocalPointRotator : MonoBehaviour
     private void CameraRotate(Vector2 value)
     {
         moveDirection = value.x;
-    }
+    }*/
 }
