@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6944956829472501872}
   - component: {fileID: 5288613821190760123}
   - component: {fileID: 7875386119085650458}
-  - component: {fileID: 7917547517224229612}
   - component: {fileID: -8672929538023347898}
+  - component: {fileID: 5659052893845793694}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -49,8 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8445050106183518651}
-  respawnCooldown: 10
-  respawnCountdownRemaining: 0
+  onRespawnCooldown: 0
 --- !u!114 &7875386119085650458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,20 +133,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7917547517224229612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 239099382533575094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa5e3f4243cccc0438aff9d50f677835, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerContainer: {fileID: 0}
-  playerModel: {fileID: 0}
 --- !u!114 &-8672929538023347898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +151,22 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 0}
   - {r: 0.14917341, g: 0.5660378, b: 0, a: 0}
   - {r: 1, g: 1, b: 1, a: 0}
+--- !u!114 &5659052893845793694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239099382533575094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5e3f4243cccc0438aff9d50f677835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerContainer: {fileID: 5288613821190760123}
+  playerModel: {fileID: 8445050106183518651}
+  respawnCooldown: 5
+  respawnCountdown: 0
 --- !u!1001 &875516178108297839
 PrefabInstance:
   m_ObjectHideFlags: 0

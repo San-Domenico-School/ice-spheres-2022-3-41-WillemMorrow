@@ -25,17 +25,26 @@ public class PlayerControler : MonoBehaviour
     private GameObject player;
     private SphereCollider playerCollider;
     private PlayerInputActions playerInputActions;
+    private Death death;
+    private PlayerContainer containerClass;
+
     private Vector2 moveVector;
+    private Vector3 startPos;    
+
     public bool hasPowerUp {  get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
         hasPowerUp = GameManager.Singleton.debugPowerUpRepel;
+        startPos = transform.position;
 
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<SphereCollider>();
         powerUpIndicator = GetComponent<Light>();
+        death = GetComponentInParent<Death>();
+        containerClass = GetComponent<PlayerContainer>();
+
         playerCollider.material.bounciness = 0.4f;
 
         player = this.gameObject;
@@ -47,17 +56,15 @@ public class PlayerControler : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-
-        if (transform.position.y < -10)
-        {
-            // IMPLIMENT PLAYER DEATH
-        }
     }
 
-    private void OnEnable()
+    // OnDisable is called when the player is disabled, aka when it "dies".
+    private void OnDisable()
     {
-        
+        transform.position = startPos;
+        rb.velocity = Vector3.zero;
     }
+
 
     // called by the Player Input component of the player, sets the player's moveVector to the value of the movement keys via calling SetMoveVector.
     public void OnInputAction(InputAction.CallbackContext ctx) => SetMoveVector(ctx.ReadValue<Vector2>());
@@ -65,7 +72,6 @@ public class PlayerControler : MonoBehaviour
     private void SetMoveVector(Vector2 value)
     {
         moveVector = value;
-        Debug.Log("63: " + moveVector);
     }
 
     // assigns the player's values with those of the GameManager for the current level
@@ -75,7 +81,6 @@ public class PlayerControler : MonoBehaviour
         rb.mass = GameManager.Singleton.playerMass;
         rb.drag = GameManager.Singleton.playerDrag;
         moveForceMagnitude = (GameManager.Singleton.playerMoveForce) * 10;
-        focalPoint = (GameObject.Find("FocalPoint").transform);
 
         Debug.Log($"{rb.mass}, {rb.drag}, {moveForceMagnitude}, {focalPoint.name}");
     }
@@ -86,7 +91,6 @@ public class PlayerControler : MonoBehaviour
         {
             rb.AddForce((focalPoint.forward.normalized * moveVector.y) * moveForceMagnitude * Time.deltaTime);
             rb.AddForce((focalPoint.right.normalized * moveVector.x) * moveForceMagnitude * Time.deltaTime);
-            Debug.Log($"Movement vector = {moveVector}");
         }
 
         else
@@ -121,6 +125,11 @@ public class PlayerControler : MonoBehaviour
             StartCoroutine(powerUpCooldown(otherPowerUpCooldown));
 
             other.gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.CompareTag("KillPlane"))
+        {
+            death.PlayerDeath();
         }
     }
 
