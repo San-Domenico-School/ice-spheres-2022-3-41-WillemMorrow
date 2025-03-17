@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
             SpawnIceWave();
         }
 
-        if (waveNumber > portalFirstAppearence || GameManager.Singleton.debugSpawnPortal && (portal.activeInHierarchy == false))
+        if ((waveNumber > portalFirstAppearence || GameManager.Singleton.debugSpawnPortal) && (portalActive == false))
         {
             SetObjActive(portal, portalByWaveProbability);
         }
@@ -114,7 +114,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator CountdownTimer(string objectTag)
     {
-        float byWaveDuration = 0;
+        float byWaveDuration = 10;
 
         switch (objectTag)
         {
