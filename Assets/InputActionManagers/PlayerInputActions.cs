@@ -37,15 +37,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ColorSelect"",
-                    ""type"": ""Button"",
-                    ""id"": ""63c1a45a-edc5-4032-813e-24aac6fe9041"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""5b36b275-49d1-4c63-a821-889375e57bc7"",
@@ -62,6 +53,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FirePowerUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""af24f2a4-dd37-4d79-85cc-669038013208"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -287,50 +287,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3e6ee73e-0816-4aa3-b3a5-609b57e2ebf7"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""269107b2-2a38-4296-b48a-aa2bbe19c546"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""78d8bf12-0d52-4de1-bfc6-0ea81e604e21"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ec24e04d-1e4d-4799-997b-5d6bf9588816"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1362e84a-3d8e-4844-a4f2-0e63db4223ae"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -460,6 +416,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ColorSelectVector2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18e72fc8-216d-477b-8a75-f9ee6718cc8f"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirePowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bda37408-2c91-4615-a828-819c0508963e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirePowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -492,9 +470,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_ColorSelect = m_Player.FindAction("ColorSelect", throwIfNotFound: true);
         m_Player_Start = m_Player.FindAction("Start", throwIfNotFound: true);
         m_Player_ColorSelectVector2 = m_Player.FindAction("ColorSelectVector2", throwIfNotFound: true);
+        m_Player_FirePowerUp = m_Player.FindAction("FirePowerUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -557,17 +535,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_ColorSelect;
     private readonly InputAction m_Player_Start;
     private readonly InputAction m_Player_ColorSelectVector2;
+    private readonly InputAction m_Player_FirePowerUp;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @ColorSelect => m_Wrapper.m_Player_ColorSelect;
         public InputAction @Start => m_Wrapper.m_Player_Start;
         public InputAction @ColorSelectVector2 => m_Wrapper.m_Player_ColorSelectVector2;
+        public InputAction @FirePowerUp => m_Wrapper.m_Player_FirePowerUp;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -580,15 +558,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @ColorSelect.started += instance.OnColorSelect;
-            @ColorSelect.performed += instance.OnColorSelect;
-            @ColorSelect.canceled += instance.OnColorSelect;
             @Start.started += instance.OnStart;
             @Start.performed += instance.OnStart;
             @Start.canceled += instance.OnStart;
             @ColorSelectVector2.started += instance.OnColorSelectVector2;
             @ColorSelectVector2.performed += instance.OnColorSelectVector2;
             @ColorSelectVector2.canceled += instance.OnColorSelectVector2;
+            @FirePowerUp.started += instance.OnFirePowerUp;
+            @FirePowerUp.performed += instance.OnFirePowerUp;
+            @FirePowerUp.canceled += instance.OnFirePowerUp;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -596,15 +574,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @ColorSelect.started -= instance.OnColorSelect;
-            @ColorSelect.performed -= instance.OnColorSelect;
-            @ColorSelect.canceled -= instance.OnColorSelect;
             @Start.started -= instance.OnStart;
             @Start.performed -= instance.OnStart;
             @Start.canceled -= instance.OnStart;
             @ColorSelectVector2.started -= instance.OnColorSelectVector2;
             @ColorSelectVector2.performed -= instance.OnColorSelectVector2;
             @ColorSelectVector2.canceled -= instance.OnColorSelectVector2;
+            @FirePowerUp.started -= instance.OnFirePowerUp;
+            @FirePowerUp.performed -= instance.OnFirePowerUp;
+            @FirePowerUp.canceled -= instance.OnFirePowerUp;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -643,8 +621,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnColorSelect(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
         void OnColorSelectVector2(InputAction.CallbackContext context);
+        void OnFirePowerUp(InputAction.CallbackContext context);
     }
 }

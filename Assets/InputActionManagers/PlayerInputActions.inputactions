@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ColorSelect",
-                    "type": "Button",
-                    "id": "63c1a45a-edc5-4032-813e-24aac6fe9041",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Start",
                     "type": "Button",
                     "id": "5b36b275-49d1-4c63-a821-889375e57bc7",
@@ -40,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "FirePowerUp",
+                    "type": "Button",
+                    "id": "af24f2a4-dd37-4d79-85cc-669038013208",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -265,50 +265,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3e6ee73e-0816-4aa3-b3a5-609b57e2ebf7",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ColorSelect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "269107b2-2a38-4296-b48a-aa2bbe19c546",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ColorSelect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "78d8bf12-0d52-4de1-bfc6-0ea81e604e21",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ColorSelect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ec24e04d-1e4d-4799-997b-5d6bf9588816",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ColorSelect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1362e84a-3d8e-4844-a4f2-0e63db4223ae",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -438,6 +394,28 @@
                     "action": "ColorSelectVector2",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "18e72fc8-216d-477b-8a75-f9ee6718cc8f",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirePowerUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bda37408-2c91-4615-a828-819c0508963e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirePowerUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

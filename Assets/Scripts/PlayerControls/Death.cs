@@ -33,7 +33,7 @@ public class Death : MonoBehaviour
 
         Debug.Log($"Player {playerModel.name} has Died!");
     }
-
+    
     // subtracts 1 from the player's respawn timer every time its envoked, until the respawn timer is 0. 
     private void RespawnCountdown()
     {
