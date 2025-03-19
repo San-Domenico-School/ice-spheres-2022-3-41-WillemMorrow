@@ -420,8 +420,8 @@ MonoBehaviour:
   playerRepelForce: 5
   playerBounce: 0.75
   waypoints: []
-  debugSpawnWaves: 1
-  debugSpawnPortal: 1
+  debugSpawnWaves: 0
+  debugSpawnPortal: 0
   debugSpawnPowerUp: 0
   debugPowerUpRepel: 0
 --- !u!1 &1025697685

@@ -64,7 +64,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""aiming"",
+                    ""name"": ""Aiming"",
                     ""type"": ""Value"",
                     ""id"": ""60d1ba96-67e1-4404-a1b7-65ff61924116"",
                     ""expectedControlType"": ""Vector2"",
@@ -455,7 +455,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -466,7 +466,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -477,7 +477,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -488,7 +488,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -499,7 +499,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -510,7 +510,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -521,7 +521,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -532,7 +532,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -543,7 +543,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -554,7 +554,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""aiming"",
+                    ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -592,7 +592,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Start = m_Player.FindAction("Start", throwIfNotFound: true);
         m_Player_ColorSelectVector2 = m_Player.FindAction("ColorSelectVector2", throwIfNotFound: true);
         m_Player_FirePowerUp = m_Player.FindAction("FirePowerUp", throwIfNotFound: true);
-        m_Player_aiming = m_Player.FindAction("aiming", throwIfNotFound: true);
+        m_Player_Aiming = m_Player.FindAction("Aiming", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -658,7 +658,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Start;
     private readonly InputAction m_Player_ColorSelectVector2;
     private readonly InputAction m_Player_FirePowerUp;
-    private readonly InputAction m_Player_aiming;
+    private readonly InputAction m_Player_Aiming;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -667,7 +667,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Start => m_Wrapper.m_Player_Start;
         public InputAction @ColorSelectVector2 => m_Wrapper.m_Player_ColorSelectVector2;
         public InputAction @FirePowerUp => m_Wrapper.m_Player_FirePowerUp;
-        public InputAction @aiming => m_Wrapper.m_Player_aiming;
+        public InputAction @Aiming => m_Wrapper.m_Player_Aiming;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -689,9 +689,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FirePowerUp.started += instance.OnFirePowerUp;
             @FirePowerUp.performed += instance.OnFirePowerUp;
             @FirePowerUp.canceled += instance.OnFirePowerUp;
-            @aiming.started += instance.OnAiming;
-            @aiming.performed += instance.OnAiming;
-            @aiming.canceled += instance.OnAiming;
+            @Aiming.started += instance.OnAiming;
+            @Aiming.performed += instance.OnAiming;
+            @Aiming.canceled += instance.OnAiming;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -708,9 +708,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FirePowerUp.started -= instance.OnFirePowerUp;
             @FirePowerUp.performed -= instance.OnFirePowerUp;
             @FirePowerUp.canceled -= instance.OnFirePowerUp;
-            @aiming.started -= instance.OnAiming;
-            @aiming.performed -= instance.OnAiming;
-            @aiming.canceled -= instance.OnAiming;
+            @Aiming.started -= instance.OnAiming;
+            @Aiming.performed -= instance.OnAiming;
+            @Aiming.canceled -= instance.OnAiming;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)

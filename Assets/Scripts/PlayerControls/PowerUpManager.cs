@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using UnityEngine;
@@ -14,12 +16,12 @@ using UnityEngine.InputSystem;
  * ****************************************/
 
 
-public abstract class PowerUpManager : MonoBehaviour
+public class PowerUpManager : MonoBehaviour
 {
     private GameObject PowerupPrefab;
     private GameObject currentPowerup;
-    private int powerupCooldown;
-    private bool hasPowerUp;
+    [SerializeField] private int powerupCooldown;
+    [SerializeField] private bool hasPowerUp;
 
 
     //method called by pressing the fire button
@@ -31,19 +33,26 @@ public abstract class PowerUpManager : MonoBehaviour
         }
     }
 
+    // method to invoke the powerup's onFire method.
     private void InvokePowerUp()
     {
         //gets a reference to all the powerups in the child gameObjects.
         PowerUpBase[] powerUps = GetComponentsInChildren<PowerUpBase>();
 
+        // for every instance of the powerup component,
         foreach (var powerUp in powerUps)
         {
-            MethodInfo[] methods = GetType().GetMethods(BindingFlags.Public);
+            // creates a list of all of the methods in the component
+            var type = powerUp.GetType();
+            MethodInfo[] methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
+            // for every method in the component,
             foreach (var method in methods)
             {
+                // if the component's name is OnPowerUpActivate (OnPowerUpActivate()),
                 if (method.Name == "OnPowerUpActivate")
                 {
+                    // invoke that method.
                     method.Invoke(powerUp, null);
                 }
             }
@@ -53,7 +62,7 @@ public abstract class PowerUpManager : MonoBehaviour
     // 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PowerUp"))
+        if (other.CompareTag("PowerUp") && (!hasPowerUp))
         {
             PowerUpControler powerUpControler = other.GetComponent<PowerUpControler>();
 
@@ -61,24 +70,27 @@ public abstract class PowerUpManager : MonoBehaviour
             powerupCooldown = powerUpControler.GetCooldown();
 
             setPowerUp();
+
+            Destroy(other.gameObject);
         }
     }
 
-    // 
+    // sets up the powerup and calls the coroutine to remvoe it
     private void setPowerUp()
     {
         hasPowerUp = true;
         currentPowerup = Instantiate(PowerupPrefab, transform.position, transform.rotation, this.transform);
 
-        PowerupCooldown();
+        StartCoroutine(PowerupCooldown());
     }
 
-    // 
+    // coroutine responsible for "turning off" the powerup.
     private IEnumerator PowerupCooldown()
     {
-        yield return new WaitForSeconds(1);
+        Debug.Log("powerup get!");
+        yield return new WaitForSeconds(powerupCooldown);
 
-        Destroy(PowerupPrefab);
+        Destroy(currentPowerup);
 
         currentPowerup = null;
         PowerupPrefab = null;

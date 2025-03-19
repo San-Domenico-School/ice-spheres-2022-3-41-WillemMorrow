@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "aiming",
+                    "name": "Aiming",
                     "type": "Value",
                     "id": "60d1ba96-67e1-4404-a1b7-65ff61924116",
                     "expectedControlType": "Vector2",
@@ -433,7 +433,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -444,7 +444,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -455,7 +455,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -466,7 +466,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -477,7 +477,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -488,7 +488,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -499,7 +499,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -510,7 +510,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -521,7 +521,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -532,7 +532,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "aiming",
+                    "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
