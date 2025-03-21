@@ -59,8 +59,8 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // 
-    private void OnTriggerEnter(Collider other)
+    // if the player collides with a powerup, give the player whatever powerup the object is.
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("PowerUp") && (!hasPowerUp))
         {
