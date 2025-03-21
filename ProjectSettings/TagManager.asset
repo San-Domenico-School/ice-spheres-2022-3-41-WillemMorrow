@@ -9,6 +9,7 @@ TagManager:
   - Startup
   - PowerUp
   - KillPlane
+  - Scoreable
   layers:
   - Default
   - TransparentFX

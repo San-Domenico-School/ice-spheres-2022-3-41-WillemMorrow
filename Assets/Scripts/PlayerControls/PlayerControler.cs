@@ -116,6 +116,7 @@ public class PlayerControler : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Portal");
         }
 
+        /*
         if (other.gameObject.CompareTag("PowerUp"))
         {
             PowerUpControler otherPowerUpControler = other.GetComponent<PowerUpControler>();
@@ -125,7 +126,7 @@ public class PlayerControler : MonoBehaviour
             StartCoroutine(powerUpCooldown(otherPowerUpCooldown));
 
             other.gameObject.SetActive(false);
-        }
+        }*/
 
         if (other.gameObject.CompareTag("KillPlane"))
         {
@@ -151,6 +152,7 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    /*
     private IEnumerator powerUpCooldown(float cooldown)
     {
         hasPowerUp = true;
@@ -160,5 +162,5 @@ public class PlayerControler : MonoBehaviour
 
         hasPowerUp = false;
         powerUpIndicator.intensity = 0.0f;
-    }
+    }*/
 }

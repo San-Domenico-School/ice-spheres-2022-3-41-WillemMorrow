@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 /*************************************************
@@ -14,13 +15,8 @@ using UnityEngine;
 public class PowerUpControler : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private float cooldown;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int cooldown;
+    [SerializeField] private GameObject powerUpPrefab;
 
     // Update is called once per frame
     void Update()
@@ -28,8 +24,13 @@ public class PowerUpControler : MonoBehaviour
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
 
-    public float GetCooldown()
+    public int GetCooldown()
     {
         return cooldown;
+    }
+
+    public GameObject GetPrefab()
+    {
+        return powerUpPrefab;
     }
 }

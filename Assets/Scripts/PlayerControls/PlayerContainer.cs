@@ -59,9 +59,9 @@ public class PlayerContainer : MonoBehaviour
         }
     }
 
-    
 
-    // SWITCH VECTOR2 APPROACH
+    // SWITCH VECTOR2 APPROACH -- FINAL
+    // gets a vector2 from xyab, uses the vector2 to apply the color.
     private void SetColorVector(Vector2 compositeXYAB)
     {
         if (!colorChosen && compositeXYAB != Vector2.zero)
@@ -74,21 +74,29 @@ public class PlayerContainer : MonoBehaviour
                     // the player is the Senior's.
                     // player color is 0, aka the first one listed in the ColorPicker component.
                     playerColor = 0;
+                    this.gameObject.name = ("Senior");
+                    player.name = ("SeniorPlayer");
                     break;
                 case ("(0.00, -1.00)"):
                     // the player is the Freshman's
                     // player color is 3, aka the fourth one listed in the ColorPicker component.
                     playerColor = 3;
+                    this.gameObject.name = ("Fresh");
+                    player.name = ("FreshPlayer");
                     break;
                 case ("(-1.00, 0.00)"):
                     // the player is the Junior's
                     // player color is 1, aka the second one listed in the ColorPicker component.
                     playerColor = 1;
+                    this.gameObject.name = ("Junior");
+                    player.name = ("JuniorPlayer");
                     break;
                 case ("(1.00, 0.00)"):
                     // the player is the Soph's
                     // player color is 3, aka the fourth one listed in the ColorPicker component.
                     playerColor = 2;
+                    this.gameObject.name = ("Soph");
+                    player.name = ("SophPlayer");
                     break;
 
                 // UNEXPECTED BUTTON INPUT.
@@ -188,7 +196,7 @@ public class PlayerContainer : MonoBehaviour
         }
     }
 
-    // enables the player and sets its color to whatever colour they selected.
+    // enables the player and sets its colour to whatever colour they selected.
     // called by OnStart if player HASN'T selected a color
     private void StartPlayer()
     {
@@ -198,6 +206,4 @@ public class PlayerContainer : MonoBehaviour
         Renderer renderer = player.GetComponentInChildren<Renderer>();
         renderer.material.color = GetComponent<ColorPicker>().GetColor(playerColor);
     }
-
-
 }
