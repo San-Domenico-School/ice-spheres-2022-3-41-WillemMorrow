@@ -1,4 +1,12 @@
 using UnityEngine;
+/***************************************
+ * Makes player jump on colision
+ * 
+ * Component of: Trampoline
+ * 
+ * Gleb
+ * 04.19.2025
+ * ************************************/
 
 public class Trampoline : MonoBehaviour
 {

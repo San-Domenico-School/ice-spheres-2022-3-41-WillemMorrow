@@ -1,5 +1,13 @@
 using UnityEngine;
 
+/***************************************
+ * Pushes Player on collision 
+ * 
+ * Component of: WindmillBlades
+ * 
+ * Gleb
+ * 04.19.2025
+ * ************************************/
 public class WindmillBlade : MonoBehaviour
 {
     
@@ -9,19 +17,19 @@ public class WindmillBlade : MonoBehaviour
 
     void Update()
     {
-        // Rotate around the local Z-axis (or whichever axis your blades spin around)
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        // Rotate around the local Z-axis to push player in right deriction
+        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the colliding object is tagged "Player"
+        
         if (collision.gameObject.CompareTag("Player"))
         {
             Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                // Apply an impulse force in the specified push direction
+               
                 rb.AddForce(pushDirection.normalized * pushForce, ForceMode.Impulse);
             }
         }
