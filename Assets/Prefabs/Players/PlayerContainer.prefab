@@ -327,6 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118efa4fb69139b4aa39d6e7a8bb8d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerupCooldown: 0
+  hasPowerUp: 0
 --- !u!114 &2797246992823268795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,6 +447,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020609208087770429, guid: 71316d2d4a7953a47b4c1fda9121a030,
+        type: 3}
+      propertyPath: portalIgnoredLayers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020609208087770429, guid: 71316d2d4a7953a47b4c1fda9121a030,
+        type: 3}
+      propertyPath: portalIgnoredLayers.Array.data[0]
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6208151785507870917, guid: 71316d2d4a7953a47b4c1fda9121a030,
         type: 3}

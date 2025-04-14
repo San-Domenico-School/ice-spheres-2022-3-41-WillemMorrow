@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*****************************************************
+ * class responsible for notifying the scorekeeper that the player has gained score.
+ * 
+ * component of the moveable player.
+ * 
+ * Pacifica Morrow
+ * 03.25.2025
+ * **************************************************/
+
 public class PlayerScore : MonoBehaviour
 {
     private string playerName;
@@ -20,5 +29,10 @@ public class PlayerScore : MonoBehaviour
             
             // UIManager.Singleton.AddPoints(playerName, scoreAdded);
         }
+    }
+
+    public void OnPortalEnter(int scoreAdded)
+    {
+        //UIManager.Singleton.AddPoints(playerName, scoreAdded);
     }
 }

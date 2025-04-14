@@ -60,7 +60,7 @@ public class PlayerContainer : MonoBehaviour
     }
 
 
-    // SWITCH VECTOR2 APPROACH -- FINAL
+    // SWITCH VECTOR2 APPROACH -- **FINAL**
     // gets a vector2 from xyab, uses the vector2 to apply the color.
     private void SetColorVector(Vector2 compositeXYAB)
     {
@@ -109,7 +109,7 @@ public class PlayerContainer : MonoBehaviour
         }
     }
 
-    /* BUTTON PATH STRING APPROACH
+    /* [OUTDATED] BUTTON PATH STRING APPROACH
    // assigns a color based on what button was pressed. 
    // see switch cases for which button is which color.
    private void SetColor(string buttonPath)
@@ -205,5 +205,10 @@ public class PlayerContainer : MonoBehaviour
         // sets the player's color.
         Renderer renderer = player.GetComponentInChildren<Renderer>();
         renderer.material.color = GetComponent<ColorPicker>().GetColor(playerColor);
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
 }

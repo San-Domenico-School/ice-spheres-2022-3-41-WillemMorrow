@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System;
+using System.Linq;
 
 /*******************************************
  * Class responsible for controling the player & administering powerups.
@@ -20,6 +23,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float moveForceMagnitude;
     [SerializeField] private Transform focalPoint;
     [SerializeField] private Light powerUpIndicator;
+    [SerializeField] private int[] portalIgnoredLayers;
 
     private Rigidbody rb;
     private GameObject player;
@@ -27,6 +31,7 @@ public class PlayerControler : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private Death death;
     private PlayerContainer containerClass;
+    private PlayerScore playerScore;
 
     private Vector2 moveVector;
     private Vector3 startPos;    
@@ -44,12 +49,15 @@ public class PlayerControler : MonoBehaviour
         powerUpIndicator = GetComponent<Light>();
         death = GetComponentInParent<Death>();
         containerClass = GetComponent<PlayerContainer>();
+        playerScore = GetComponent<PlayerScore>();
 
         playerCollider.material.bounciness = 0.4f;
 
         player = this.gameObject;
-
         player.SetActive(false);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
 
     // Update is called once per frame
@@ -63,6 +71,11 @@ public class PlayerControler : MonoBehaviour
     {
         transform.position = startPos;
         rb.velocity = Vector3.zero;
+    }
+
+    private void OnEnable()
+    {
+        AssignLevelValues();
     }
 
 
@@ -82,7 +95,6 @@ public class PlayerControler : MonoBehaviour
         rb.drag = GameManager.Singleton.playerDrag;
         moveForceMagnitude = (GameManager.Singleton.playerMoveForce) * 10;
 
-        Debug.Log($"{rb.mass}, {rb.drag}, {moveForceMagnitude}, {focalPoint.name}");
     }
 
     private void Move()
@@ -100,6 +112,12 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        AssignLevelValues();
+    }
+
+    /*
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -107,12 +125,14 @@ public class PlayerControler : MonoBehaviour
             AssignLevelValues();
             playerCollider.material.bounciness = GameManager.Singleton.playerBounce;
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Portal"))
+        if (other.gameObject.CompareTag("Portal") && !(portalIgnoredLayers.Contains<int>(gameObject.layer)))
         {
+            Debug.Log(gameObject.layer);
+
             gameObject.layer = LayerMask.NameToLayer("Portal");
         }
 
@@ -136,18 +156,28 @@ public class PlayerControler : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Portal"))
+        //if the gameobject which the player is colldiign with is a portal, and the player's CURRENT layer isnt one that can enter the portal.
+        if (other.gameObject.CompareTag("Portal") && !(portalIgnoredLayers.Contains<int>(gameObject.layer)))
         {
             gameObject.layer = LayerMask.NameToLayer("Player");
 
-            // If, when the player leaves the portal, it is under the portal, IE it has gone through the portal
+            // If, when the player leaves the portal, it is under the portal, IE it has gone through the portal,
             if (transform.position.y < -1.0f)
             {
-                string portalDestination = other.GetComponent<PortalController>().GetDestination();
+                //get a reference to the playercontorler
+                PortalController portalController = other.GetComponent<PortalController>();
+
+                //give the portal's destination to the islandmanager, and load that scene.
+                string portalDestination = portalController.GetDestination();
                 IslandManager.Singleton.SwitchLevels(portalDestination);
                 
+                // reset the player's position and velocity.
                 rb.velocity = Vector3.zero;
                 transform.position = Vector3.up * 25;
+
+                //add the respective score to the player.
+                int portalScoreAdded = portalController.GetScore();
+                playerScore.OnPortalEnter(portalScoreAdded);
             }
         }
     }

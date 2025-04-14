@@ -23,11 +23,10 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] private int powerupCooldown;
     [SerializeField] private bool hasPowerUp;
 
-
     //method called by pressing the fire button
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (currentPowerup != null)
+        if (currentPowerup != null && context.started)
         {
             InvokePowerUp();
         }
@@ -60,7 +59,7 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // if the player collides with a powerup, give the player whatever powerup the object is.
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PowerUp") && (!hasPowerUp))
         {
@@ -87,7 +86,6 @@ public class PowerUpManager : MonoBehaviour
     // coroutine responsible for "turning off" the powerup.
     private IEnumerator PowerupCooldown()
     {
-        Debug.Log("powerup get!");
         yield return new WaitForSeconds(powerupCooldown);
 
         Destroy(currentPowerup);

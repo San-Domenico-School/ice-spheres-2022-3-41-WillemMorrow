@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5074913462013521144}
   - component: {fileID: 1292157443583004226}
   - component: {fileID: 7049562229897522577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 6183387667516148868}
   - component: {fileID: 6020609208087770429}
   - component: {fileID: 3500023968974430011}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -258,6 +258,7 @@ MonoBehaviour:
   moveForceMagnitude: 1584.9
   focalPoint: {fileID: 0}
   powerUpIndicator: {fileID: 6183387667516148868}
+  portalIgnoredLayers: 
 --- !u!114 &3500023968974430011
 MonoBehaviour:
   m_ObjectHideFlags: 0

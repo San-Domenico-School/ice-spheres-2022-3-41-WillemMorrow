@@ -17,11 +17,17 @@ public class PowerUpControler : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private int cooldown;
     [SerializeField] private GameObject powerUpPrefab;
+    [SerializeField] private int minPosY;
 
     // Update is called once per frame
     void Update()
     {
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+
+        if (transform.position.y < minPosY)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public int GetCooldown()
