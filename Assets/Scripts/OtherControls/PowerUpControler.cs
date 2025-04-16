@@ -32,4 +32,12 @@ public class PowerUpControler : MonoBehaviour
     {
         return cooldown;
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

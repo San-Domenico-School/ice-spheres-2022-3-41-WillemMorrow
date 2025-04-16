@@ -28,6 +28,8 @@ public class PlayerControler : MonoBehaviour
     private Vector2 moveVector;
     public bool hasPowerUp {  get; private set; }
 
+    public int playerIndex = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -117,10 +119,17 @@ public class PlayerControler : MonoBehaviour
             PowerUpControler otherPowerUpControler = other.GetComponent<PowerUpControler>();
             float otherPowerUpCooldown = otherPowerUpControler.GetCooldown();
 
+            Destroy(other.gameObject);
             
             StartCoroutine(powerUpCooldown(otherPowerUpCooldown));
 
             other.gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.CompareTag("Collectable"))
+        {
+            //ScoreManager.Instance.AddScore(playerIndex);
+            Destroy(other.gameObject);
         }
     }
 

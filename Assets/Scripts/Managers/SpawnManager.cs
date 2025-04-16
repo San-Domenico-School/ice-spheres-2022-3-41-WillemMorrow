@@ -18,6 +18,8 @@ public class SpawnManager : MonoBehaviour
 {
     [Header("Objects To Spawn")]
     [SerializeField] GameObject iceSphere;
+    [SerializeField] GameObject iceSphereQuick;
+    [SerializeField] GameObject iceSphereHeavy;
     [SerializeField] GameObject portal;
     [SerializeField] GameObject powerUp;
 
@@ -59,8 +61,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if ((FindObjectsOfType<IceSphereControler>().Length == 0.0f) && (GameObject.Find("player")))
+        if ((FindObjectsOfType<IceSphereControler>().Length == 0.0f) && (GameObject.Find("PlayerContainer(Clone)")))
         {
             SpawnIceWave();
         }
@@ -80,13 +81,21 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    private void RandomEnemyType()
+    {
+        int cycleIndex = waveNumber % 3;
+        GameObject chosenEnemy = null;
+    }
+
     private void SpawnIceWave()
     {
+        //int randomIndex = Random.Range(0, enemyPrefabs.Length)
+
         for (int i = 0; i < (waveNumber + increaseEachWave);)
         {
             Instantiate(iceSphere, SetRandomPosition(0), iceSphere.transform.rotation);
-
-            if (1 <= maximumWave)
+        
+            if (3 <= maximumWave)
             {
                 i++;
             }

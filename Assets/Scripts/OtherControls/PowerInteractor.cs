@@ -33,6 +33,7 @@ public class PowerInteractor : MonoBehaviour
             Rigidbody playerRB = player.GetComponent<Rigidbody>();
             PlayerControler playerControlerScript = player.GetComponent<PlayerControler>();
             Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+            Destroy(gameObject);
 
             if (playerControlerScript.hasPowerUp)
             {

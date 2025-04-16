@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - Startup
   - PowerUp
+  - Collectable
   layers:
   - Default
   - TransparentFX

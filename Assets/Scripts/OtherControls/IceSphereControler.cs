@@ -14,6 +14,8 @@ using UnityEngine;
 
 public class IceSphereControler : MonoBehaviour
 {
+    [SerializeField] private float lowerRangeMass;
+    [SerializeField] private float upperRangeMass;
     private float startDelay;
     private float reductionEachRepeat;
     private float minimumVolume;
@@ -24,10 +26,10 @@ public class IceSphereControler : MonoBehaviour
     void Start()
     {
         startDelay = 3.0f;
-        minimumVolume = 0.2f;
+        minimumVolume = 1f;
         if (GameManager.Singleton.debugSpawnWaves)
         {
-            reductionEachRepeat = .5f;
+            reductionEachRepeat = .3f;
         }
         else
         {
@@ -40,14 +42,22 @@ public class IceSphereControler : MonoBehaviour
         RandomizeSizeAndMass();
 
         InvokeRepeating("Melt", startDelay, 0.4f);
+
+        RandomEnemyType();
     }
 
     private void RandomizeSizeAndMass()
     {
-        float randSizeAndMass = Random.Range(0.5f, 1.0f);
+        float randSizeAndMass = Random.Range(lowerRangeMass, upperRangeMass);
 
         transform.localScale *= randSizeAndMass;
         iceRb.mass *= randSizeAndMass;
+    }
+
+    private void RandomEnemyType()
+    {
+    
+        
     }
 
     private void Melt()
