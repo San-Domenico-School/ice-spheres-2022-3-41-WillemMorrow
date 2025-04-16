@@ -66,7 +66,6 @@ public class PowerUpSpawnManager : MonoBehaviour
 
     private void Update()
     {
-        
         // removes all null elements from the list of total powerup collectables on scene, so that the max number of powerups can work properly.
         //if (powerUpsOnScene.Contains(null)) // doesnt work??????
         //{
@@ -78,12 +77,14 @@ public class PowerUpSpawnManager : MonoBehaviour
         {
             Destroy(powerUpsOnScene[0]);
         }
+
+
     }
 
     // spawns a ranodom powerup from the list of powerup prefabs.
     private void SpawnPowerUp()
     {
-        if (powerUpsOnScene.Count < maxPowerUps)
+        if ((powerUpsOnScene.Count < maxPowerUps) && (GameManager.Singleton.alivePlayers > 0))
         {
             int powerUpIndex = Random.Range(0, powerUpPrefabs.Length);
             GameObject powerUp = powerUpPrefabs[powerUpIndex];

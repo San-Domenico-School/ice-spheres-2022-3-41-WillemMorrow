@@ -21,7 +21,8 @@ public class PlayerMagnet : PowerUpBase
 
     [Header("Magnet Power Fields")]
     [SerializeField] private int magnetStrength;
-    [SerializeField] private int playerMagnetMult;
+    [SerializeField] private float playerMagnetMult;
+    [SerializeField] private float collectableMagnetMult;
 
     private GameObject playerParent;
     private Rigidbody playerRb;
@@ -68,15 +69,17 @@ public class PlayerMagnet : PowerUpBase
     // acts every frame object(s) are colliding with any trigger of the object.
     private void OnTriggerStay(Collider other)
     {
+        // if other is a collectable (powerup or scoreable)
         if (other.CompareTag("PowerUp") && (magnetEnabled))
         {
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
 
             Vector3 pushDirection = other.transform.position - transform.position;
 
-            otherRb.AddForce(-pushDirection * magnetStrength * Time.deltaTime);
+            otherRb.AddForce(-pushDirection * magnetStrength * collectableMagnetMult * Time.deltaTime);
         }
 
+        // if other is a player
         else if ((other.CompareTag("Player")) && magnetEnabled)
         {
             Rigidbody otherRb = other.GetComponent<Rigidbody>();

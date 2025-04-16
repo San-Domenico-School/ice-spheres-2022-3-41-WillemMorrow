@@ -7,7 +7,6 @@ using UnityEngine;
  * 
  * component of the moveable player.
  * 
- * Pacifica Morrow
  * 03.25.2025
  * **************************************************/
 

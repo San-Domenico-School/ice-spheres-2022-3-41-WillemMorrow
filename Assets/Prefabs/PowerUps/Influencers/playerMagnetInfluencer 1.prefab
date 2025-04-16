@@ -83,7 +83,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 50
-  m_Range: 6.0701556
+  m_Range: 9.39413
   m_SpotAngle: 62.859066
   m_InnerSpotAngle: 34.027542
   m_CookieSize: 10
@@ -212,7 +212,8 @@ MonoBehaviour:
   lightOffIntensity: 230
   lightOnIntensity: 50
   magnetStrength: 1600
-  playerMagnetMult: 2
+  playerMagnetMult: 0.5
+  collectableMagnetMult: 1.5
 --- !u!1 &5672740435039265579
 GameObject:
   m_ObjectHideFlags: 0

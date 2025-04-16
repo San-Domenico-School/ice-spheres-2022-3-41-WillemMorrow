@@ -8,6 +8,7 @@ public class RotationContainer : MonoBehaviour
 {
     [SerializeField] private GameObject playerParent;
     private float aimDirection;
+    private Transform focalPoint;
     
     // sets the object's position to sit upon the player.
     private void Update()
@@ -23,9 +24,18 @@ public class RotationContainer : MonoBehaviour
         // if conditional prevents the game from resetting the rotation when the player drops the right stick.
         if (aimVector.x != 0 || aimVector.y != 0)
         {
-            aimDirection = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg * -1;
-            
-            transform.rotation = Quaternion.Euler(new Vector3(0, aimDirection, 0));
+            if (focalPoint != null)
+            {
+                aimDirection = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg * -1;
+
+                transform.rotation = Quaternion.Euler(new Vector3(0, aimDirection, 0));
+            }
+
+            else
+            {
+                focalPoint = GameObject.Find("FocalPoint").transform;
+                Debug.Log($"focalpoint = {focalPoint.name}");
+            }
         }
     }
 

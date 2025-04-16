@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     public bool gameOver { get; private set; }
     public bool playerHasPowerUp { get; private set; }
 
+    public int totalPlayers;
+    public int alivePlayers;
 
     void Awake()
     {

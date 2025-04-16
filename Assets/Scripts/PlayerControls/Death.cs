@@ -22,6 +22,9 @@ public class Death : MonoBehaviour
     // Called by the player, when it falls too far off the map. 
     public void PlayerDeath()
     {
+        // reduces the number of alive players in the MameGanager.
+        GameManager.Singleton.alivePlayers--;
+
         // disables the player, simulating death.
         playerModel.SetActive(false);
 

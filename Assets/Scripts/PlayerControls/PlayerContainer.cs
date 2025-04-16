@@ -20,6 +20,7 @@ public class PlayerContainer : MonoBehaviour
     [SerializeField] private GameObject player;
 
     public bool onRespawnCooldown; // if the player can respawn or not; if false, player can respawn.
+    private bool playerAlive;
     
     // color fields
     private bool colorChosen;
@@ -32,6 +33,20 @@ public class PlayerContainer : MonoBehaviour
     {
         colorPicker = GetComponent<ColorPicker>();
         DontDestroyOnLoad(gameObject);
+        GameManager.Singleton.totalPlayers++;
+    }
+
+    private void Update()
+    {
+        if (player.activeInHierarchy)
+        {
+            playerAlive = true;
+        }
+        
+        else
+        {
+            playerAlive = false;
+        }
     }
 
     //called by Player Input component, sends vector2 to SetColorVector.
@@ -44,18 +59,24 @@ public class PlayerContainer : MonoBehaviour
     // Called by pressing the Start button; Start on controller, space on keyboard.
     public void OnStart(InputAction.CallbackContext ctx)
     {
-        // if the color is already chosen,
-        if (colorChosen)
+        if (!playerAlive)
         {
-            SpawnPlayer();
-        }
+            playerAlive = true;
+            GameManager.Singleton.alivePlayers++;
 
-        // if the color hasnt been chosen,
-        else
-        {
-            StartPlayer();
+            // if the color is already chosen,
+            if (colorChosen)
+            {
+                SpawnPlayer();
+            }
 
-            colorChosen = true;
+            // if the color hasnt been chosen,
+            else
+            {
+                StartPlayer();
+
+                colorChosen = true;
+            }
         }
     }
 
