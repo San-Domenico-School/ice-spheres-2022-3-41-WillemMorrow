@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerContainer: {fileID: 5288613821190760123}
   playerModel: {fileID: 8445050106183518651}
-  respawnCooldown: 5
+  respawnCooldown: 10
   respawnCountdown: 0
 --- !u!1 &1924149167001524963
 GameObject:

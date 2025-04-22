@@ -26,15 +26,18 @@ public class RotationContainer : MonoBehaviour
         {
             if (focalPoint != null)
             {
-                aimDirection = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg * -1;
+                Vector3 localAimDirection = focalPoint.TransformDirection(aimVector.normalized);
 
-                transform.rotation = Quaternion.Euler(new Vector3(0, aimDirection, 0));
+                aimDirection = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg * -1;
+                //Debug.Log($"aimdirection = {aimDirection}");
+
+                transform.rotation = focalPoint.rotation * (Quaternion.Euler(new Vector3(0, aimDirection, 0)));
             }
 
             else
             {
                 focalPoint = GameObject.Find("FocalPoint").transform;
-                Debug.Log($"focalpoint = {focalPoint.name}");
+                //Debug.Log($"focalpoint = {focalPoint.name}");
             }
         }
     }

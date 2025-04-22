@@ -27,11 +27,13 @@ public class PlayerContainer : MonoBehaviour
     private int playerColor = 4; //defaults the player color to 4, or silver. see this.SetColorVector2() for details.
 
     private ColorPicker colorPicker; // reference to the colorpicker.
+    private MaterialPicker materialPicker; // reference to the materialPicker of the player.
 
 
     private void Start()
     {
         colorPicker = GetComponent<ColorPicker>();
+        materialPicker = GetComponent <MaterialPicker>();
         DontDestroyOnLoad(gameObject);
         GameManager.Singleton.totalPlayers++;
     }
@@ -89,6 +91,8 @@ public class PlayerContainer : MonoBehaviour
         {
             Debug.Log(compositeXYAB.ToString());
 
+            // switch statement deciding what to do given a Vector2.ToString (a vector2 expressed as a string)
+            // click arrow to open
             switch (compositeXYAB.ToString())
             {
                 case ("(0.00, 1.00)"):
@@ -225,7 +229,8 @@ public class PlayerContainer : MonoBehaviour
 
         // sets the player's color.
         Renderer renderer = player.GetComponentInChildren<Renderer>();
-        renderer.material.color = GetComponent<ColorPicker>().GetColor(playerColor);
+        renderer.material.color = colorPicker.GetColor(playerColor);
+        renderer.material = materialPicker.GetMaterial(playerColor);
     }
 
     public GameObject GetPlayer()

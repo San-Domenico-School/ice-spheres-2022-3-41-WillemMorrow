@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeIncrease: 4
   PowerUpTimer: 9.9
-  jumpForce: 60
+  jumpForce: 45
   massIncrease: 4
