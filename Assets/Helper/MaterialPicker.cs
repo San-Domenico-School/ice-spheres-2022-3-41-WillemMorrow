@@ -20,7 +20,7 @@ public class MaterialPicker : MonoBehaviour
 
     public Material GetMaterial(int desiredIndex)
     {
-        if (desiredIndex >= materials.Length)
+        if (desiredIndex <= materials.Length)
         {
             return materials[desiredIndex];
         }

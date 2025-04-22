@@ -11,7 +11,7 @@ using UnityEngine.InputSystem.DualShock;
  * component of the playerContainer prefab.
  * 
  * Pacifica Morrow
- * 03.06.2025
+ * 04.22.2025
  * **************************************/
 
 public class PlayerContainer : MonoBehaviour
@@ -20,16 +20,18 @@ public class PlayerContainer : MonoBehaviour
     [SerializeField] private GameObject player;
 
     public bool onRespawnCooldown; // if the player can respawn or not; if false, player can respawn.
-    private bool playerAlive;
+    private bool playerAlive; // whether the player is alive.
     
     // color fields
-    private bool colorChosen;
+    private bool colorChosen; // whether or not the color has been chosen, aka if the plaer has started.
     private int playerColor = 4; //defaults the player color to 4, or silver. see this.SetColorVector2() for details.
 
     private ColorPicker colorPicker; // reference to the colorpicker.
     private MaterialPicker materialPicker; // reference to the materialPicker of the player.
 
+    private Color playerColorColor; // the player's class color expressed as a type of Color.
 
+    // start.
     private void Start()
     {
         colorPicker = GetComponent<ColorPicker>();
@@ -38,6 +40,7 @@ public class PlayerContainer : MonoBehaviour
         GameManager.Singleton.totalPlayers++;
     }
 
+    // update()
     private void Update()
     {
         if (player.activeInHierarchy)
@@ -229,12 +232,17 @@ public class PlayerContainer : MonoBehaviour
 
         // sets the player's color.
         Renderer renderer = player.GetComponentInChildren<Renderer>();
-        renderer.material.color = colorPicker.GetColor(playerColor);
+        playerColorColor = colorPicker.GetColor(playerColor);
         renderer.material = materialPicker.GetMaterial(playerColor);
     }
 
     public GameObject GetPlayer()
     {
         return player;
+    }
+
+    public Color GetPlayerColor()
+    {
+        return playerColorColor;
     }
 }

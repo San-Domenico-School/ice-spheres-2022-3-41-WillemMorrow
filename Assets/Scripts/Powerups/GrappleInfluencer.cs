@@ -41,7 +41,7 @@ public class GrappleInfluencer : PowerUpBase
         playerRb = playerParent.GetComponent<Rigidbody>();
 
         magnetLight = GetComponent<Light>();
-        Color lightColor = playerParent.GetComponentInChildren<Renderer>().material.color;
+        Color lightColor = playerContainer.GetPlayerColor();
         magnetLight.color = lightColor;
     }
 
@@ -73,7 +73,7 @@ public class GrappleInfluencer : PowerUpBase
     private void OnTriggerStay(Collider other)
     {
         //applies move force to (player) & (powerup or other player)
-        if ((other.CompareTag("Player") || (other.CompareTag("PowerUp"))) && (magnetEnabled))
+        if ((other.CompareTag("Player") || (other.CompareTag("PowerUp")) || (other.CompareTag("Scoreable"))) && (magnetEnabled))
         {
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
 

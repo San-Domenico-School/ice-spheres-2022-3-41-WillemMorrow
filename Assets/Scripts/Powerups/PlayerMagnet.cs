@@ -38,7 +38,7 @@ public class PlayerMagnet : PowerUpBase
         playerRb = playerParent.GetComponent<Rigidbody>();
 
         magnetLight = GetComponent<Light>();
-        Color lightColor = playerParent.GetComponentInChildren<Renderer>().material.color;
+        Color lightColor = playerContainer.GetPlayerColor();
         magnetLight.color = lightColor;
     }
 
@@ -70,7 +70,7 @@ public class PlayerMagnet : PowerUpBase
     private void OnTriggerStay(Collider other)
     {
         // if other is a collectable (powerup or scoreable)
-        if (other.CompareTag("PowerUp") && (magnetEnabled))
+        if ((other.CompareTag("PowerUp") || (other.CompareTag("Scoreable"))) && (magnetEnabled))
         {
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
 

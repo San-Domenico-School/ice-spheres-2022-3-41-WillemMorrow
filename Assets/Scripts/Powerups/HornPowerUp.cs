@@ -35,7 +35,7 @@ public class HornPowerUp : PowerUpBase
 
         //change to the playercolor when player model is implimented
         indicatorLight = GetComponent<Light>();
-        indicatorLight.color = playerParent.GetComponentInChildren<Renderer>().material.color;
+        indicatorLight.color = playerContainer.GetPlayerColor();
         lightIntensity = indicatorLight.intensity;
 
         applicableObjects = new List<GameObject>();

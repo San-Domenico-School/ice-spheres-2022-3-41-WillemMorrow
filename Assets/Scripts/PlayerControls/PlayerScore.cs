@@ -25,8 +25,10 @@ public class PlayerScore : MonoBehaviour
         {
             Scoreable scoreable = other.GetComponent<Scoreable>();
             int scoreAdded = scoreable.GetScore();
-            
+
             // UIManager.Singleton.AddPoints(playerName, scoreAdded);
+
+            Destroy(other.gameObject);
         }
     }
 

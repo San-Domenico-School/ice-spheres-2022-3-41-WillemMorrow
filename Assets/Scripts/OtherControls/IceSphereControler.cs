@@ -11,7 +11,6 @@ using UnityEngine;
  * 02.14.2025
  * ********************************************/
 
-
 public class IceSphereControler : MonoBehaviour
 {
     private float startDelay;

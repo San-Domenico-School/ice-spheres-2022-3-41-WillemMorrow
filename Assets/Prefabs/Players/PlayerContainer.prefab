@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7875386119085650458}
   - component: {fileID: -8672929538023347898}
   - component: {fileID: 5659052893845793694}
+  - component: {fileID: 1563661255539149255}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -196,6 +197,24 @@ MonoBehaviour:
   playerModel: {fileID: 8445050106183518651}
   respawnCooldown: 10
   respawnCountdown: 0
+--- !u!114 &1563661255539149255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239099382533575094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9ebe484e84f71489283c1cf3a6830e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: a03a953585326fa448a0bd1ee7ff278a, type: 2}
+  - {fileID: 2100000, guid: c1f35d993a9695248853f829d9ca7651, type: 2}
+  - {fileID: 2100000, guid: 3e34e0a2c5f444441a15b483a75ccaf5, type: 2}
+  - {fileID: 2100000, guid: 2b18aca19dea1c34fb8f9c7b16a2bcee, type: 2}
+  - {fileID: 2100000, guid: f91c34b0529fbc54dae7d3b54b3a30e3, type: 2}
 --- !u!1 &1924149167001524963
 GameObject:
   m_ObjectHideFlags: 0
