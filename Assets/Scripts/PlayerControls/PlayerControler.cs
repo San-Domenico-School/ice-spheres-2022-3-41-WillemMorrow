@@ -24,6 +24,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private Transform focalPoint;
     [SerializeField] private Light powerUpIndicator;
     [SerializeField] private int[] portalIgnoredLayers;
+    private GameObject windmall;
 
     private Rigidbody rb;
     private GameObject player;
@@ -41,6 +42,7 @@ public class PlayerControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        windmall = GameObject.Find("Windmall");
         hasPowerUp = GameManager.Singleton.debugPowerUpRepel;
         startPos = transform.position;
 
@@ -122,6 +124,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
+            windmall.layer = LayerMask.NameToLayer("Default");
             AssignLevelValues();
             playerCollider.material.bounciness = GameManager.Singleton.playerBounce;
         }

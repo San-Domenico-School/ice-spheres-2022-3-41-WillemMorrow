@@ -10,6 +10,7 @@ TagManager:
   - PowerUp
   - KillPlane
   - Scoreable
+  - Trampoline
   layers:
   - Default
   - TransparentFX
