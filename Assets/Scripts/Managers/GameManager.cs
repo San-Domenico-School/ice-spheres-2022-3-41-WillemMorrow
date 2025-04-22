@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     public bool gameOver { get; private set; }
     public bool playerHasPowerUp { get; private set; }
 
+    public int totalPlayers;
+    public int alivePlayers;
 
     void Awake()
     {
@@ -52,27 +54,5 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void EnablePlayer()
-    {
-
-    }
-
-    private void SwitchLevels()
-    {
-
     }
 }

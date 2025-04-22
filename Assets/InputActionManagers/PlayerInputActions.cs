@@ -37,15 +37,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ColorSelect"",
-                    ""type"": ""Button"",
-                    ""id"": ""63c1a45a-edc5-4032-813e-24aac6fe9041"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""5b36b275-49d1-4c63-a821-889375e57bc7"",
@@ -58,6 +49,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""ColorSelectVector2"",
                     ""type"": ""Value"",
                     ""id"": ""6975b361-79a4-47d6-a4fd-38fb7b902359"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FirePowerUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""af24f2a4-dd37-4d79-85cc-669038013208"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aiming"",
+                    ""type"": ""Value"",
+                    ""id"": ""60d1ba96-67e1-4404-a1b7-65ff61924116"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -287,50 +296,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3e6ee73e-0816-4aa3-b3a5-609b57e2ebf7"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""269107b2-2a38-4296-b48a-aa2bbe19c546"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""78d8bf12-0d52-4de1-bfc6-0ea81e604e21"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ec24e04d-1e4d-4799-997b-5d6bf9588816"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ColorSelect"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1362e84a-3d8e-4844-a4f2-0e63db4223ae"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -460,6 +425,138 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ColorSelectVector2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18e72fc8-216d-477b-8a75-f9ee6718cc8f"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirePowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bda37408-2c91-4615-a828-819c0508963e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirePowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""RightStick"",
+                    ""id"": ""629ce3e4-e809-48fc-a051-843a9426cb4e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9148ca8d-2a68-4a26-8a9c-228a3cb27cef"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""6482ef28-8e4d-41df-99f0-d86954f55ef3"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fea67932-58ad-48db-b480-bec185b62246"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ca577180-ae3f-40f6-bf57-c41db6fd38dd"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""IJKL"",
+                    ""id"": ""9eeb34e1-b8f3-410b-9abd-455063b1927f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7e680295-b9b6-4fa8-aa4d-1db7b28d0b01"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f6c96851-59c2-45c9-9e0a-82368aa9c6b1"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6b1a09aa-0a38-43b9-94e4-38318470cb62"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a8b94cd6-04db-4648-b3c2-ae0db619d365"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -492,9 +589,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_ColorSelect = m_Player.FindAction("ColorSelect", throwIfNotFound: true);
         m_Player_Start = m_Player.FindAction("Start", throwIfNotFound: true);
         m_Player_ColorSelectVector2 = m_Player.FindAction("ColorSelectVector2", throwIfNotFound: true);
+        m_Player_FirePowerUp = m_Player.FindAction("FirePowerUp", throwIfNotFound: true);
+        m_Player_Aiming = m_Player.FindAction("Aiming", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -557,17 +655,19 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_ColorSelect;
     private readonly InputAction m_Player_Start;
     private readonly InputAction m_Player_ColorSelectVector2;
+    private readonly InputAction m_Player_FirePowerUp;
+    private readonly InputAction m_Player_Aiming;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @ColorSelect => m_Wrapper.m_Player_ColorSelect;
         public InputAction @Start => m_Wrapper.m_Player_Start;
         public InputAction @ColorSelectVector2 => m_Wrapper.m_Player_ColorSelectVector2;
+        public InputAction @FirePowerUp => m_Wrapper.m_Player_FirePowerUp;
+        public InputAction @Aiming => m_Wrapper.m_Player_Aiming;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -580,15 +680,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @ColorSelect.started += instance.OnColorSelect;
-            @ColorSelect.performed += instance.OnColorSelect;
-            @ColorSelect.canceled += instance.OnColorSelect;
             @Start.started += instance.OnStart;
             @Start.performed += instance.OnStart;
             @Start.canceled += instance.OnStart;
             @ColorSelectVector2.started += instance.OnColorSelectVector2;
             @ColorSelectVector2.performed += instance.OnColorSelectVector2;
             @ColorSelectVector2.canceled += instance.OnColorSelectVector2;
+            @FirePowerUp.started += instance.OnFirePowerUp;
+            @FirePowerUp.performed += instance.OnFirePowerUp;
+            @FirePowerUp.canceled += instance.OnFirePowerUp;
+            @Aiming.started += instance.OnAiming;
+            @Aiming.performed += instance.OnAiming;
+            @Aiming.canceled += instance.OnAiming;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -596,15 +699,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @ColorSelect.started -= instance.OnColorSelect;
-            @ColorSelect.performed -= instance.OnColorSelect;
-            @ColorSelect.canceled -= instance.OnColorSelect;
             @Start.started -= instance.OnStart;
             @Start.performed -= instance.OnStart;
             @Start.canceled -= instance.OnStart;
             @ColorSelectVector2.started -= instance.OnColorSelectVector2;
             @ColorSelectVector2.performed -= instance.OnColorSelectVector2;
             @ColorSelectVector2.canceled -= instance.OnColorSelectVector2;
+            @FirePowerUp.started -= instance.OnFirePowerUp;
+            @FirePowerUp.performed -= instance.OnFirePowerUp;
+            @FirePowerUp.canceled -= instance.OnFirePowerUp;
+            @Aiming.started -= instance.OnAiming;
+            @Aiming.performed -= instance.OnAiming;
+            @Aiming.canceled -= instance.OnAiming;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -643,8 +749,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnColorSelect(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
         void OnColorSelectVector2(InputAction.CallbackContext context);
+        void OnFirePowerUp(InputAction.CallbackContext context);
+        void OnAiming(InputAction.CallbackContext context);
     }
 }

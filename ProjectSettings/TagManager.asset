@@ -8,6 +8,8 @@ TagManager:
   - Portal
   - Startup
   - PowerUp
+  - KillPlane
+  - Scoreable
   - Trampoline
   layers:
   - Default
@@ -20,8 +22,8 @@ TagManager:
   - Ground
   - Portal
   - Startup
-  - 
-  - 
+  - EnlargedPlayer
+  - IgnorePlayer
   - 
   - 
   - 

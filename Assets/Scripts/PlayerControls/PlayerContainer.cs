@@ -18,25 +18,37 @@ public class PlayerContainer : MonoBehaviour
 {
     [Header("Editable Fields")]
     [SerializeField] private GameObject player;
-    public int respawnCooldown;
 
-    [Header("Debug Fields; do not edit.")]
-    [SerializeField] private int respawnCountdownRemaining;
-
-    private bool onRespawnCooldown;
+    public bool onRespawnCooldown; // if the player can respawn or not; if false, player can respawn.
+    private bool playerAlive;
     
     // color fields
     private bool colorChosen;
-    private int playerColor = 4;
+    private int playerColor = 4; //defaults the player color to 4, or silver. see this.SetColorVector2() for details.
 
-    private ColorPicker colorPicker;
+    private ColorPicker colorPicker; // reference to the colorpicker.
+    private MaterialPicker materialPicker; // reference to the materialPicker of the player.
 
 
     private void Start()
     {
         colorPicker = GetComponent<ColorPicker>();
-        respawnCountdownRemaining = respawnCooldown;
+        materialPicker = GetComponent <MaterialPicker>();
         DontDestroyOnLoad(gameObject);
+        GameManager.Singleton.totalPlayers++;
+    }
+
+    private void Update()
+    {
+        if (player.activeInHierarchy)
+        {
+            playerAlive = true;
+        }
+        
+        else
+        {
+            playerAlive = false;
+        }
     }
 
     //called by Player Input component, sends vector2 to SetColorVector.
@@ -46,23 +58,131 @@ public class PlayerContainer : MonoBehaviour
     // called by PlayerInput component, sends a string containing the button path (which button is pressed) to the SetColor method
     //public void OnColorAction(InputAction.CallbackContext ctx) => SetColor(ctx.control.path);
 
-
+    // Called by pressing the Start button; Start on controller, space on keyboard.
     public void OnStart(InputAction.CallbackContext ctx)
     {
-        if (colorChosen)
+        if (!playerAlive)
         {
-            SpawnPlayer();
-        }
+            playerAlive = true;
+            GameManager.Singleton.alivePlayers++;
 
-        else
-        {
-            StartPlayer();
+            // if the color is already chosen,
+            if (colorChosen)
+            {
+                SpawnPlayer();
+            }
 
-            colorChosen = true;
+            // if the color hasnt been chosen,
+            else
+            {
+                StartPlayer();
+
+                colorChosen = true;
+            }
         }
     }
 
-    /*private void SetColorVector(Vector2 compositeXYAB)
+
+    // SWITCH VECTOR2 APPROACH -- **FINAL**
+    // gets a vector2 from xyab, uses the vector2 to apply the color.
+    private void SetColorVector(Vector2 compositeXYAB)
+    {
+        if (!colorChosen && compositeXYAB != Vector2.zero)
+        {
+            Debug.Log(compositeXYAB.ToString());
+
+            // switch statement deciding what to do given a Vector2.ToString (a vector2 expressed as a string)
+            // click arrow to open
+            switch (compositeXYAB.ToString())
+            {
+                case ("(0.00, 1.00)"):
+                    // the player is the Senior's.
+                    // player color is 0, aka the first one listed in the ColorPicker component.
+                    playerColor = 0;
+                    this.gameObject.name = ("Senior");
+                    player.name = ("SeniorPlayer");
+                    break;
+                case ("(0.00, -1.00)"):
+                    // the player is the Freshman's
+                    // player color is 3, aka the fourth one listed in the ColorPicker component.
+                    playerColor = 3;
+                    this.gameObject.name = ("Fresh");
+                    player.name = ("FreshPlayer");
+                    break;
+                case ("(-1.00, 0.00)"):
+                    // the player is the Junior's
+                    // player color is 1, aka the second one listed in the ColorPicker component.
+                    playerColor = 1;
+                    this.gameObject.name = ("Junior");
+                    player.name = ("JuniorPlayer");
+                    break;
+                case ("(1.00, 0.00)"):
+                    // the player is the Soph's
+                    // player color is 3, aka the fourth one listed in the ColorPicker component.
+                    playerColor = 2;
+                    this.gameObject.name = ("Soph");
+                    player.name = ("SophPlayer");
+                    break;
+
+                // UNEXPECTED BUTTON INPUT.
+                default:
+                    // playercolor is white; default.
+                    Debug.LogWarning("Unexpected Input!");
+                    playerColor = 4;
+                    break;
+            }
+        }
+    }
+
+    /* [OUTDATED] BUTTON PATH STRING APPROACH
+   // assigns a color based on what button was pressed. 
+   // see switch cases for which button is which color.
+   private void SetColor(string buttonPath)
+   {
+       if (!colorChosen)
+       {
+           Debug.Log(buttonPath);
+
+           switch (buttonPath)
+           {
+               // CLASS CONTROLLER
+               case "/DualShock4GamepadHID/buttonNorth":
+                   // the player is the Senior's.
+                   // player color is 0, aka the first one listed in the ColorPicker component.
+                   playerColor = 0;
+                   break;
+
+               case "/DualShock4GamepadHID/buttonSouth":
+                   // the player is the Freshman's
+                   // player color is 3, aka the fourth one listed in the ColorPicker component.
+                   playerColor = 3;
+                   break;
+
+               case "/DualShock4GamepadHID/buttonWest":
+                   // the player is the Junior's
+                   // player color is 1, aka the second one listed in the ColorPicker component.
+                   playerColor = 1;
+                   break;
+
+               case "/DualShock4GamepadHID/buttonEast":
+                   // the player is the Soph's
+                   // player color is 3, aka the fourth one listed in the ColorPicker component.
+                   playerColor = 2;
+                   break;
+
+               // UNEXPECTED BUTTON INPUT.
+               default:
+                   // playercolor is white; default.
+                   Debug.LogWarning("Unexpected Input!");
+                   playerColor = 4;
+                   break;
+           }
+       }
+   } 
+   */
+
+    /* [OUTDATED] IF STATEMENT APPROACH
+    private void SetColorVector(Vector2 compositeXYAB)
     {
         if (!colorChosen)
         {
@@ -90,95 +210,8 @@ public class PlayerContainer : MonoBehaviour
         }
     }*/
 
-    // SWITCH VECTOR2 APPROACH
-    private void SetColorVector(Vector2 compositeXYAB)
-    {
-        if (!colorChosen && compositeXYAB != Vector2.zero)
-        {
-            Debug.Log(compositeXYAB.ToString());
-
-            switch (compositeXYAB.ToString())
-            {
-                case ("(0.00, 1.00)"):
-                    // the player is the Senior's.
-                    // player color is 0, aka the first one listed in the ColorPicker component.
-                    playerColor = 0;
-                    break;
-                case ("(0.00, -1.00)"):
-                    // the player is the Freshman's
-                    // player color is 3, aka the fourth one listed in the ColorPicker component.
-                    playerColor = 3;
-                    break;
-                case ("(-1.00, 0.00)"):
-                    // the player is the Junior's
-                    // player color is 1, aka the second one listed in the ColorPicker component.
-                    playerColor = 1;
-                    break;
-                case ("(1.00, 0.00)"):
-                    // the player is the Soph's
-                    // player color is 3, aka the fourth one listed in the ColorPicker component.
-                    playerColor = 2;
-                    break;
-
-                // UNEXPECTED BUTTON INPUT.
-                default:
-                    // playercolor is white; default.
-                    Debug.LogWarning("Unexpected Input!");
-                    playerColor = 4;
-                    break;
-            }
-        }
-    }
-
-    /*
-     * BUTTON PATH STRING APPROACH
-    // assigns a color based on what button was pressed. 
-    // see switch cases for which button is which color.
-    private void SetColor(string buttonPath)
-    {
-        if (!colorChosen)
-        {
-            Debug.Log(buttonPath);
-
-            switch (buttonPath)
-            {
-                // CLASS CONTROLLER
-                case "/DualShock4GamepadHID/buttonNorth":
-                    // the player is the Senior's.
-                    // player color is 0, aka the first one listed in the ColorPicker component.
-                    playerColor = 0;
-                    break;
-
-                case "/DualShock4GamepadHID/buttonSouth":
-                    // the player is the Freshman's
-                    // player color is 3, aka the fourth one listed in the ColorPicker component.
-                    playerColor = 3;
-                    break;
-
-                case "/DualShock4GamepadHID/buttonWest":
-                    // the player is the Junior's
-                    // player color is 1, aka the second one listed in the ColorPicker component.
-                    playerColor = 1;
-                    break;
-
-                case "/DualShock4GamepadHID/buttonEast":
-                    // the player is the Soph's
-                    // player color is 3, aka the fourth one listed in the ColorPicker component.
-                    playerColor = 2;
-                    break;
-
-                // UNEXPECTED BUTTON INPUT.
-                default:
-                    // playercolor is white; default.
-                    Debug.LogWarning("Unexpected Input!");
-                    playerColor = 4;
-                    break;
-            }
-        }
-    } 
-    */
-    
-    // enables the player without changing the color
+    // enables the player without changing the color;
+    // called by OnStart if player HAS already selected a color
     private void SpawnPlayer()
     {
         if (!onRespawnCooldown)
@@ -188,47 +221,20 @@ public class PlayerContainer : MonoBehaviour
         }
     }
 
-    // enables the player and sets its color to whatever colour they selecred.
+    // enables the player and sets its colour to whatever colour they selected.
+    // called by OnStart if player HASN'T selected a color
     private void StartPlayer()
     {
         player.SetActive(true);
 
+        // sets the player's color.
         Renderer renderer = player.GetComponentInChildren<Renderer>();
-        renderer.material.color = GetComponent<ColorPicker>().GetColor(playerColor);
-        Debug.Log(playerColor);
+        renderer.material.color = colorPicker.GetColor(playerColor);
+        renderer.material = materialPicker.GetMaterial(playerColor);
     }
 
-    // Called by the player, when it falls too far off the map. 
-    private void PlayerDeath()
+    public GameObject GetPlayer()
     {
-        // disables the player, simulating death.
-        player.SetActive(false);
-
-        // sets onRespawnCooldown to indicate the player cannot respawn.
-        onRespawnCooldown = true;
-
-        // invokes respawnCountdown() every second.
-        InvokeRepeating("respawnCountdown", 0, 1);
+        return player;
     }
-
-    // subtracts 1 from the player's respawn timer every time its envoked, until the respawn timer is 0. 
-    private void respawnCountdown()
-    {
-        // subtract from the respawn cooldown if it is above 0.
-        if (respawnCountdownRemaining > 0)
-        {
-            respawnCountdownRemaining--;
-        }
-
-        // if countdown below zero: cancel the counting down, reset the timer, and cancelinvoke the method.
-        else
-        {
-            CancelInvoke("respawnCountdown");
-
-            onRespawnCooldown = false;
-            respawnCountdownRemaining = respawnCooldown;
-        }
-
-    }
-
 }

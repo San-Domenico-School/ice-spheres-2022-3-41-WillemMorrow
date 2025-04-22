@@ -14,7 +14,7 @@ using UnityEngine;
 public class ColorPicker : MonoBehaviour
 {
     [SerializeField] private Color[] colors; //array to hold the available colors
-    private static int colorIndex; //Index for the color array
+    //private static int colorIndex; //Index for the color array
 
     public Color GetColor(int desiredColorIndex)
     {
@@ -37,6 +37,15 @@ public class ColorPicker : MonoBehaviour
         ******************************/
 
         // returns the original colorIndex before it was modified, via the local variable
-        return colors[desiredColorIndex];
+        if (desiredColorIndex <= colors.Length)
+        {
+            return colors[desiredColorIndex];
+        }
+
+        else
+        {
+            Debug.LogError("color index outside bounds. please use a inside the length of the colors list of the ColorPicker class.");
+            return Color.white;
+        }
     }
 }
