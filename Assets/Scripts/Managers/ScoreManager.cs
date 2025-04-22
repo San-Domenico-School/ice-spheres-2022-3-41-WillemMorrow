@@ -4,12 +4,22 @@ using UnityEngine;
 using TMPro;
 using System;
 
+/**************************************************
+ * Adding, saving, and loading player scores
+ * Attached to PlayerController
+ * 
+ * Sebastian Balakier
+ * 4/22/25 Version 1.0
+ **************************************************/
+
+//ScoreManager.Instance(UpdateScene) (player,change)
+
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     private int numberOfPlayers = 4;
     private int[] playerScores;
-    private TextMeshProUGUI scoreUI;
+    private TextMeshProUGUI[] scoreUI;
     public int playerIndex;
     
 
@@ -31,7 +41,7 @@ public class ScoreManager : MonoBehaviour
 
         for (int i = 0; i < numberOfPlayers; i++) 
         {
-            scoreUI = GameObject.Find("Score_" + (i + 1)).GetComponent<TextMeshProUGUI>();
+            scoreUI[i] = GameObject.Find("Score_" + (i + 9)).GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -40,22 +50,13 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    public object UpdateScore(int playerIndex, int points)
+    public void UpdateScore(int playerIndex, int points)
     {
-        if (playerIndex >= 0)
-        {
-            return playerScores[playerIndex] += points;
-        }
-        else
-        {
-            // Decide on a proper fallback value, like 0 or -1
-            return 0;
-        }
         playerScores[playerIndex] += points;
 
         if (scoreUI != null)
         {
-            scoreUI(playerIndex).text = "Player" + playerIndex.ToString() + ": " + playerScores[playerIndex].ToString();
+            scoreUI[playerIndex].text = "Player" + playerIndex.ToString() + ": " + playerScores[playerIndex].ToString();
         }
         LoadScore();
     }
