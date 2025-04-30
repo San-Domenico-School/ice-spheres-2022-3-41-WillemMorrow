@@ -59,6 +59,8 @@ public class ScoreManager : MonoBehaviour
             scoreUI[playerIndex].text = "Player" + playerIndex.ToString() + ": " + playerScores[playerIndex].ToString();
         }
         LoadScore();
+
+        return;
     }
 
     private void SaveScore()
@@ -87,9 +89,11 @@ public class ScoreManager : MonoBehaviour
                 UpdateScore(0, i);
             }
         }
+
+        return;
     }
 
-    public void AddScore()
+    public void AddScore(int playerIndex, int points)
     {
         
     }

@@ -30,6 +30,8 @@ public class PlayerControler : MonoBehaviour
 
     public int playerIndex = 4;
 
+    public int score = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +69,7 @@ public class PlayerControler : MonoBehaviour
     private void SetMoveVector(Vector2 value)
     {
         moveVector = value;
-        Debug.Log("63: " + moveVector);
+        //Debug.Log("63: " + moveVector);
     }
 
     // assigns the player's values with those of the GameManager for the current level
@@ -79,7 +81,7 @@ public class PlayerControler : MonoBehaviour
         moveForceMagnitude = (GameManager.Singleton.playerMoveForce) * 10;
         focalPoint = (GameObject.Find("FocalPoint").transform);
 
-        Debug.Log($"{rb.mass}, {rb.drag}, {moveForceMagnitude}, {focalPoint.name}");
+        //Debug.Log($"{rb.mass}, {rb.drag}, {moveForceMagnitude}, {focalPoint.name}");
     }
 
     private void Move()
@@ -88,13 +90,13 @@ public class PlayerControler : MonoBehaviour
         {
             rb.AddForce((focalPoint.forward.normalized * moveVector.y) * moveForceMagnitude * Time.deltaTime);
             rb.AddForce((focalPoint.right.normalized * moveVector.x) * moveForceMagnitude * Time.deltaTime);
-            Debug.Log($"Movement vector = {moveVector}");
+            //Debug.Log($"Movement vector = {moveVector}");
         }
 
         else
         {
             focalPoint = GameObject.Find("FocalPoint").transform;
-            Debug.Log($"focalpoint = {focalPoint.name}");
+            //Debug.Log($"focalpoint = {focalPoint.name}");
         }
     }
 
@@ -128,8 +130,10 @@ public class PlayerControler : MonoBehaviour
 
         if (other.gameObject.CompareTag("Collectable"))
         {
-            ScoreManager.Instance.AddScore(playerIndex);
+            score += 1;
             Destroy(other.gameObject);
+            ScoreManager.Instance.UpdateScore(playerIndex, 1);
+            Debug.Log("Score added");
         }
     }
 
