@@ -62,6 +62,21 @@ public class ScoreableSpawnManager : MonoBehaviour
         InvokeRepeating("RemovePowerUp", 0, 5);
     }
 
+    private void Update()
+    {
+        // removes all null elements from the list of total powerup collectables on scene, so that the max number of powerups can work properly.
+        //if (scoreablesOnScene.Contains(null)) // doesnt work??????
+        //{
+        scoreablesOnScene.RemoveAll(obj => obj == null);
+        //}
+        
+        // if there are more powerups than the max on the scene, the first one will be destroyed.
+        if (scoreablesOnScene.Count > maxScoreables)
+        {
+            Destroy(scoreablesOnScene[0]);
+        }
+    }
+
     // spawns a scoreable on a random point on the map.
     private void SpawnScoreable()
     {
