@@ -24,11 +24,13 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private Transform focalPoint;
     [SerializeField] private Light powerUpIndicator;
     [SerializeField] private int[] portalIgnoredLayers;
+
     private GameObject windmall;
 
     private Rigidbody rb;
     private GameObject player;
     private SphereCollider playerCollider;
+
     private PlayerInputActions playerInputActions;
     private Death death;
     private PlayerContainer containerClass;
@@ -38,6 +40,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 startPos;    
 
     public bool hasPowerUp {  get; private set; }
+    private bool grounded;
 
     // Start is called before the first frame update
     void Start()
@@ -130,6 +133,22 @@ public class PlayerControler : MonoBehaviour
         }
     }*/
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            SwitchGrounded(true);
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            SwitchGrounded(false);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Portal") && !(portalIgnoredLayers.Contains<int>(gameObject.layer)))
@@ -185,7 +204,13 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    /*
+    private void SwitchGrounded(bool onGround)
+    {
+        grounded = onGround;
+
+    }
+
+    /* coroutine "PowerUpCooldown" (handled by PowerUpManager now)       
     private IEnumerator powerUpCooldown(float cooldown)
     {
         hasPowerUp = true;

@@ -18,6 +18,7 @@ public class PlayerContainer : MonoBehaviour
 {
     [Header("Editable Fields")]
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerModel;
 
     public bool onRespawnCooldown; // if the player can respawn or not; if false, player can respawn.
     private bool playerAlive; // whether the player is alive.
@@ -231,14 +232,23 @@ public class PlayerContainer : MonoBehaviour
         player.SetActive(true);
 
         // sets the player's color.
-        Renderer renderer = player.GetComponentInChildren<Renderer>();
+        Renderer renderer = GetComponentInChildren<Renderer>();
         playerColorColor = colorPicker.GetColor(playerColor);
         renderer.material = materialPicker.GetMaterial(playerColor);
     }
 
-    public GameObject GetPlayer()
+    public GameObject GetPlayer(int index)
     {
-        return player;
+        switch (index.ToString())
+        {
+            case ("0"):
+                return player;
+            case ("1"):
+                return playerModel;
+            default:
+                return null;
+        }
+
     }
 
     public Color GetPlayerColor()

@@ -34,7 +34,7 @@ public class PlayerMagnet : PowerUpBase
     void Start()
     {
         PlayerContainer playerContainer = GetComponentInParent<PlayerContainer>();
-        playerParent = playerContainer.GetPlayer();
+        playerParent = playerContainer.GetPlayer(0);
         playerRb = playerParent.GetComponent<Rigidbody>();
 
         magnetLight = GetComponent<Light>();
