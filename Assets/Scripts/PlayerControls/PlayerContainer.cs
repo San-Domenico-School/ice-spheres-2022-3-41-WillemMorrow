@@ -103,27 +103,31 @@ public class PlayerContainer : MonoBehaviour
                     // the player is the Senior's.
                     // player color is 0, aka the first one listed in the ColorPicker component.
                     playerColor = 0;
+                    gameObject.name = "Senior";
                     break;
                 case ("(0.00, -1.00)"):
                     // the player is the Freshman's
                     // player color is 3, aka the fourth one listed in the ColorPicker component.
                     playerColor = 3;
+                    gameObject.name = "Freshman";
                     break;
                 case ("(-1.00, 0.00)"):
                     // the player is the Junior's
                     // player color is 1, aka the second one listed in the ColorPicker component.
                     playerColor = 1;
+                    gameObject.name = "Junior";
                     break;
                 case ("(1.00, 0.00)"):
                     // the player is the Soph's
                     // player color is 3, aka the fourth one listed in the ColorPicker component.
                     playerColor = 2;
+                    gameObject.name = "Sophomore";
                     break;
 
                 // UNEXPECTED BUTTON INPUT.
                 default:
                     // playercolor is white; default.
-                    Debug.LogWarning("Unexpected Input!");
+                    Debug.LogWarning("PlayerContainer_130 Unexpected Input!");
                     playerColor = 4;
                     break;
             }
@@ -184,7 +188,6 @@ public class PlayerContainer : MonoBehaviour
         if (!onRespawnCooldown)
         {
             player.SetActive(true);
-            Debug.Log("Player Spawned!");
         }
     }
 
@@ -195,7 +198,6 @@ public class PlayerContainer : MonoBehaviour
 
         Renderer renderer = player.GetComponentInChildren<Renderer>();
         renderer.material.color = GetComponent<ColorPicker>().GetColor(playerColor);
-        Debug.Log(playerColor);
     }
 
     // Called by the player, when it falls too far off the map. 

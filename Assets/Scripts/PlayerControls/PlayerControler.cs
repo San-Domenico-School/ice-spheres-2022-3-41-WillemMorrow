@@ -28,7 +28,7 @@ public class PlayerControler : MonoBehaviour
     private Vector2 moveVector;
     public bool hasPowerUp {  get; private set; }
 
-    public int playerIndex = 4;
+    private int playerIndex;
 
     public int score = 0;
 
@@ -60,7 +60,22 @@ public class PlayerControler : MonoBehaviour
 
     private void OnEnable()
     {
-        
+            switch (gameObject.name)
+            {
+                case "Senior":
+                    playerIndex = 0;
+                    break;
+                case "Junior":
+                    playerIndex = 1;
+                    break;
+                case "Sophomore":
+                    playerIndex = 2;
+                    break;
+                case "Freshman":
+                    playerIndex = 3;
+                    break;
+            }
+        Debug.Log("Line 78: " + gameObject.name + ": " + playerIndex);
     }
 
     // called by the Player Input component of the player, sets the player's moveVector to the value of the movement keys via calling SetMoveVector.
@@ -69,7 +84,6 @@ public class PlayerControler : MonoBehaviour
     private void SetMoveVector(Vector2 value)
     {
         moveVector = value;
-        //Debug.Log("63: " + moveVector);
     }
 
     // assigns the player's values with those of the GameManager for the current level
@@ -130,10 +144,9 @@ public class PlayerControler : MonoBehaviour
 
         if (other.gameObject.CompareTag("Collectable"))
         {
-            score += 1;
-            Destroy(other.gameObject);
+            Debug.Log($"playerIndex = {playerIndex}, PlayerController 132");
             ScoreManager.Instance.UpdateScore(playerIndex, 1);
-            Debug.Log("Score added");
+            Destroy(other.gameObject);
         }
     }
 

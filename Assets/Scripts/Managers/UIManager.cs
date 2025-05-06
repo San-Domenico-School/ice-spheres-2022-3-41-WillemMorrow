@@ -15,10 +15,12 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text[] uiTextBoxes = new TMP_Text[5];
+    //[SerializeField] private TMP_Text[] uiTextBoxes = new TMP_Text[5];
     private float Countdown = 480f;
     private float secondAccumulator = 0f;
-    private int[] score = new int[4];
+    //private int[] score = new int[4];
+
+
 
     // Start is called before the first frame update
     private void Start()
@@ -40,11 +42,10 @@ public class UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Scene Loaded");
     }
 
     // Update is called once per frame - timer deduction and game end
-    void Update()
+    public void Update()
     {
         if (Countdown > 0f)
 
@@ -63,9 +64,11 @@ public class UIManager : MonoBehaviour
         {
             Countdown = 0f;
             Time.timeScale = 0f;
-            uiTextBoxes[4].text = "Time is up!";
-            Debug.Log("TIme is up");
+            //uiTextBoxes[4].text = "Time is up!";
         }
+
+        //uiTextBoxes[5].text = "" + score;
+        
     }
 
     //timer format and text
@@ -74,6 +77,6 @@ public class UIManager : MonoBehaviour
         float clampedTime = Mathf.Max(Countdown, 0f);
         TimeSpan time = TimeSpan.FromSeconds(clampedTime);
         string formattedTime = time.ToString(@"mm\:ss");
-        uiTextBoxes[4].text = "Time: " + formattedTime;
+        //uiTextBoxes[4].text = "Time: " + formattedTime;
     }
 }

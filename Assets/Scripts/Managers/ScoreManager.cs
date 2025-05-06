@@ -20,8 +20,8 @@ public class ScoreManager : MonoBehaviour
     private int numberOfPlayers = 4;
     private int[] playerScores;
     private TextMeshProUGUI[] scoreUI;
-    public int playerIndex;
-    
+
+    public UIManager uiManager;
 
     // Start is called before the first frame update
     private void Awake()
@@ -52,6 +52,7 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateScore(int playerIndex, int points)
     {
+        Debug.Log("ScoreManager_62 Player: " + playerIndex);
         playerScores[playerIndex] += points;
 
         if (scoreUI != null)
@@ -59,13 +60,11 @@ public class ScoreManager : MonoBehaviour
             scoreUI[playerIndex].text = "Player" + playerIndex.ToString() + ": " + playerScores[playerIndex].ToString();
         }
         LoadScore();
-
-        return;
     }
 
     private void SaveScore()
     {
-
+        
     }
 
     private void LoadScore()
@@ -89,6 +88,8 @@ public class ScoreManager : MonoBehaviour
                 UpdateScore(0, i);
             }
         }
+        
+        uiManager.Update();
 
         return;
     }
