@@ -2,20 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/********************************
+ * component of the playerContainer
+ * 
+ * 
+ * 
+ * *******************************/
+
+
 public class Death : MonoBehaviour
 {
     [Header("Editable Fields")]
     [SerializeField] private PlayerContainer playerContainer;
-    [SerializeField] private GameObject playerModel; 
+    [SerializeField] private GameObject playerModel;
+    [SerializeField] private GameObject player;
     public int respawnCooldown; // the full ORIGINAL cooldown, set before starting the game. 
 
     [Header("Debug Fields; do not edit.")]
     [SerializeField] private int respawnCountdown; // the respawn cooldown that gets counted down.
 
+    private int indexNum;
+
     // sets fields upon the player joining.
     private void Start()
     {
         respawnCountdown = respawnCooldown;
+
+        string playerName = gameObject.name;
+
+        // switch statement assigning indexNum
+        switch (playerName)
+        {
+            case ("Senior"):
+                indexNum = 0;
+                break;
+            case ("Junior"):
+                indexNum = 1;
+                break;
+            case ("Soph"):
+                indexNum = 2;
+                break;
+            case ("Fresh"):
+                indexNum = 3;
+                break;
+            default:
+                indexNum = 4;
+                break;
+        }
     }
 
     // Start is called before the first frame update
@@ -27,6 +60,7 @@ public class Death : MonoBehaviour
 
         // disables the player, simulating death.
         playerModel.SetActive(false);
+        player.SetActive(false);
 
         // sets onRespawnCooldown to indicate the player cannot respawn.
         playerContainer.onRespawnCooldown = true;
@@ -45,9 +79,9 @@ public class Death : MonoBehaviour
         // subtract from the respawn cooldown if it is above 0.
         if (respawnCountdown > 0)
         {
-            // IMPLIMENT UPDATING THE UI
-
             respawnCountdown--;
+
+            Scorekeeper.Singleton.UpdateDeathTimer(indexNum, respawnCountdown);
         }
 
         // if countdown below zero: cancel the counting down, reset the timer, and cancelinvoke the method.
@@ -60,6 +94,5 @@ public class Death : MonoBehaviour
             // sets the onRespawnCooldown in the PLAYER CONTAINER to false. Player can now respawn.
             playerContainer.onRespawnCooldown = false; 
         }
-
     }
 }
