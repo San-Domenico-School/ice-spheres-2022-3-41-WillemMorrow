@@ -18,6 +18,8 @@ public class PlayerContainer : MonoBehaviour
 {
     [Header("Editable Fields")]
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerModel;
+    
 
     public bool onRespawnCooldown; // if the player can respawn or not; if false, player can respawn.
     private bool playerAlive; // whether the player is alive.
@@ -57,9 +59,6 @@ public class PlayerContainer : MonoBehaviour
     //called by Player Input component, sends vector2 to SetColorVector.
     public void OnColorAction(InputAction.CallbackContext ctx) => SetColorVector(ctx.ReadValue<Vector2>());
 
-    ///outdated -- string approach
-    // called by PlayerInput component, sends a string containing the button path (which button is pressed) to the SetColor method
-    //public void OnColorAction(InputAction.CallbackContext ctx) => SetColor(ctx.control.path);
 
     // Called by pressing the Start button; Start on controller, space on keyboard.
     public void OnStart(InputAction.CallbackContext ctx)
@@ -220,7 +219,10 @@ public class PlayerContainer : MonoBehaviour
         if (!onRespawnCooldown)
         {
             player.SetActive(true);
+            playerModel.SetActive(true);
             Debug.Log("Player Spawned!");
+
+            Scorekeeper.Singleton.UpdateScore(playerColor, 0);
         }
     }
 
@@ -231,14 +233,24 @@ public class PlayerContainer : MonoBehaviour
         player.SetActive(true);
 
         // sets the player's color.
-        Renderer renderer = player.GetComponentInChildren<Renderer>();
+        Renderer renderer = GetComponentInChildren<Renderer>();
         playerColorColor = colorPicker.GetColor(playerColor);
         renderer.material = materialPicker.GetMaterial(playerColor);
     }
 
-    public GameObject GetPlayer()
+    public GameObject GetPlayer(int index)
     {
-        return player;
+        // switch statement getting 
+        switch (index.ToString())
+        {
+            case ("0"):
+                return player;
+            case ("1"):
+                return playerModel;
+            default:
+                return null;
+        }
+
     }
 
     public Color GetPlayerColor()
