@@ -95,10 +95,15 @@ public class PlayerControler : MonoBehaviour
     // assigns the player's values with those of the GameManager for the current level
     private void AssignLevelValues()
     {
+
         transform.localScale = GameManager.Singleton.playerScale;
-        rb.mass = GameManager.Singleton.playerMass;
-        rb.drag = GameManager.Singleton.playerDrag;
         moveForceMagnitude = (GameManager.Singleton.playerMoveForce) * 10;
+
+        if (rb != null)
+        {
+            rb.mass = GameManager.Singleton.playerMass;
+            rb.drag = GameManager.Singleton.playerDrag;
+        }
 
     }
 
@@ -113,7 +118,7 @@ public class PlayerControler : MonoBehaviour
         else
         {
             focalPoint = GameObject.Find("FocalPoint").transform;
-            Debug.Log($"focalpoint = {focalPoint.name}");
+            //Debug.Log($"focalpoint = {focalPoint.name}");
         }
     }
 
@@ -153,9 +158,11 @@ public class PlayerControler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Portal") && !(portalIgnoredLayers.Contains<int>(gameObject.layer)))
         {
-            Debug.Log(gameObject.layer);
+            Debug.Log(gameObject.layer + gameObject.name);
 
             gameObject.layer = LayerMask.NameToLayer("Portal");
+
+            Debug.Log(gameObject.layer);
         }
 
         /*
@@ -184,7 +191,7 @@ public class PlayerControler : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Player");
 
             // If, when the player leaves the portal, it is under the portal, IE it has gone through the portal,
-            if (transform.position.y < -1.0f)
+            if (transform.position.y < 0.0f)
             {
                 //get a reference to the playercontorler
                 PortalController portalController = other.GetComponent<PortalController>();

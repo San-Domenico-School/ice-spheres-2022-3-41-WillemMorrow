@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Roguelike Prototypes/Island1.unity
     guid: a4b96ad7a65484fd4a83cb97540eee50
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Roguelike Prototypes/Island2.unity
     guid: 427f4f31dd8509b4596f5b0838493e0c
+  - enabled: 1
+    path: Assets/Scenes/Roguelike Prototypes/Island3.unity
+    guid: d2101005150914fcab123f6875b96e6b
   m_configObjects: {}

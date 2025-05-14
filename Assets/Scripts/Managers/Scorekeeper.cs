@@ -25,8 +25,9 @@ using UnityEngine.SceneManagement;
 public class Scorekeeper : MonoBehaviour
 {
     public static Scorekeeper Singleton;
+
     private int numberOfPlayers = 4;
-    private int[] playerScores; // Tracks the player's score
+    public int[] playerScores { get; private set; } // Tracks the player's score
     private GameObject[] scoreUI;
 
     private void Awake()

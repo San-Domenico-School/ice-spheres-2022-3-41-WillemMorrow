@@ -91,7 +91,7 @@ public class PlayerContainer : MonoBehaviour
     {
         if (!colorChosen && compositeXYAB != Vector2.zero)
         {
-            Debug.Log(compositeXYAB.ToString());
+            //Debug.Log(compositeXYAB.ToString());
 
             // switch statement deciding what to do given a Vector2.ToString (a vector2 expressed as a string)
             // click arrow to open
