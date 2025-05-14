@@ -58,6 +58,10 @@ public class Death : MonoBehaviour
         // reduces the number of alive players in the MameGanager.
         GameManager.Singleton.alivePlayers--;
 
+        // disables all powerups.
+        PowerUpManager playerPowerupManager = playerContainer.GetComponentInChildren<PowerUpManager>();
+        playerPowerupManager.RemovePowerUp();
+
         // disables the player, simulating death.
         playerModel.SetActive(false);
         player.SetActive(false);
@@ -74,8 +78,6 @@ public class Death : MonoBehaviour
     // subtracts 1 from the player's respawn timer every time its envoked, until the respawn timer is 0. 
     private void RespawnCountdown()
     {
-        Debug.Log("RespawnCountdown() called!");
-
         // subtract from the respawn cooldown if it is above 0.
         if (respawnCountdown > 0)
         {
