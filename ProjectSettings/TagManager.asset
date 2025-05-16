@@ -8,7 +8,9 @@ TagManager:
   - Portal
   - Startup
   - PowerUp
-  - Collectable
+  - KillPlane
+  - Scoreable
+  - Trampoline
   layers:
   - Default
   - TransparentFX
@@ -20,9 +22,9 @@ TagManager:
   - Ground
   - Portal
   - Startup
-  - 
-  - 
-  - 
+  - EnlargedPlayer
+  - IgnorePlayer
+  - Windmill
   - 
   - 
   - 

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Players/PlayerSeniors.mat.meta
+guid: 796f97c3497c59845aba78c60b5673c9
+========
+guid: d9f03a7fe88ea41959cbe5bb00fc7aae
+>>>>>>>> main:Assets/Scenes/Roguelike Prototypes/Island3/NavMesh-Island.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

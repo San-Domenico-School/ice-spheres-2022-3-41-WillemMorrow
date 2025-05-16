@@ -14,9 +14,20 @@ using UnityEngine;
 public class PortalController : MonoBehaviour
 {
     [SerializeField] private string destination;
+    [SerializeField] private int scoreAdded;
 
     public string GetDestination()
     {
         return destination;
+    }
+
+    public int GetScore()
+    {
+        return scoreAdded;
+    }
+
+    public void SetDestination(string desiredDestination)
+    {
+        destination = desiredDestination;
     }
 }

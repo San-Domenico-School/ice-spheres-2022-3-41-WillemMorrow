@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: 6522f30e342599e4e9dd4cc2cc03c830
+<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Sunny Days.mat.meta
+guid: df25feb0beb3c46a58056410e4b8be4e
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
+========
+guid: 190a6c5fe4fca4445909a2f47dc74fb7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+>>>>>>>> main:Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Global Volume Profile 1.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
