@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PortalSpawnManager : MonoBehaviour
 {
+    [Header("portal fields")]
     [SerializeField] private string portalDestination;
-
+    [SerializeField] private float spawnHeight;
     [SerializeField] GameObject portal;
+
+    [Header("spawn requirements")]
     [SerializeField] int scoreReq;
     [SerializeField] int minTimeReq;
     private bool portalSpawned;
 
+    [Header("island")]
     [SerializeField] GameObject island;
     private Vector3 islandSize;
 
@@ -54,7 +58,7 @@ public class PortalSpawnManager : MonoBehaviour
     private void SpawnPortal()
     {
         // instantiate the portal
-        GameObject spawnedPortal = Instantiate(portal, SetRandomPosition(1), portal.transform.rotation);
+        GameObject spawnedPortal = Instantiate(portal, SetRandomPosition(spawnHeight), portal.transform.rotation);
         PortalController portalScript = spawnedPortal.GetComponent<PortalController>();
 
         portalScript.SetDestination(portalDestination);

@@ -78,6 +78,7 @@ public class PlayerControler : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
+    // called when the player respawns.
     private void OnEnable()
     {
         AssignLevelValues();
@@ -158,11 +159,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Portal") && !(portalIgnoredLayers.Contains<int>(gameObject.layer)))
         {
-            Debug.Log(gameObject.layer + gameObject.name);
-
             gameObject.layer = LayerMask.NameToLayer("Portal");
-
-            Debug.Log(gameObject.layer);
         }
 
         /*

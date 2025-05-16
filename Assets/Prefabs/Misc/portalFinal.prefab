@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: Island2
-  scoreAdded: 50
+  scoreAdded: 10
 --- !u!1001 &6520732578677735972
 PrefabInstance:
   m_ObjectHideFlags: 0

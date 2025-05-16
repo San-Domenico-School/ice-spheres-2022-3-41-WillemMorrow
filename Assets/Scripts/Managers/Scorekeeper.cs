@@ -50,14 +50,15 @@ public class Scorekeeper : MonoBehaviour
     {
         playerScores = new int[numberOfPlayers];
         scoreUI = new GameObject[numberOfPlayers];
+
+        // assigns each of the score UIs to their respective field.
         for(int i = 0; i < numberOfPlayers; i++)
         {
             scoreUI[i] = GameObject.Find("Score_" + (12 - i));  // UI element names: Score_9, Score_10, Score_11, Score_12
             //Debug.Log("Scorekeeper_39: " + scoreUI[i]);
         }
-        LoadScore();
 
-        //DontDestroyOnLoad(this);
+        LoadScore();
     }
 
     // Updates the specified player's score by adding the given number of points.
@@ -105,7 +106,7 @@ public class Scorekeeper : MonoBehaviour
 
         //Ensures that the saved data is written to storage immediately, preventing data loss if the game closes.
         PlayerPrefs.Save();
-        //Debug.Log("Scorekeeper_71: " + joinedString);
+        Debug.Log("Scorekeeper_71: " + joinedString);
     }
 
     // Loads player scores from PlayerPrefs if available.
@@ -116,16 +117,16 @@ public class Scorekeeper : MonoBehaviour
         TextMeshProUGUI[] scoreText = new TextMeshProUGUI[numberOfPlayers];
         if ((PlayerPrefs.HasKey("PlayerScore")) && (!(SceneManager.GetActiveScene().name == "Island1")))
         {
-            
-            
             string savedString = PlayerPrefs.GetString("PlayerScore"); //Gets the data that was saved
+            Debug.Log("Loaded Scores: " + savedString);
+
             string[] scores = savedString.Split('|');  //Splits the joined data into the individual scores
 
             int length = Mathf.Min(playerScores.Length, scores.Length); // Makes sure there are not more scores then players (rare)
             for (int i = 0; i < length; i++)
             {
                 playerScores[i] = int.Parse(scores[i]);  //Converts the string into an int
-                UpdateScore(i, playerScores[i]);             
+                UpdateScore(i, 0);             
             }
         }
         else

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3789263506978566293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5040977834514439664}
+  - component: {fileID: 6850691081141649938}
+  m_Layer: 0
+  m_Name: ScoreableSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5040977834514439664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3789263506978566293}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6850691081141649938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3789263506978566293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb4c7f5ace5032428e63f761f818336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreablePrefabs:
+  - {fileID: 2626749297125663264, guid: 4cb33f69a412cf64b9a748af2d2fc29b, type: 3}
+  - {fileID: 3998948671339483008, guid: b16bea1c96d67a94bb19b9d0f8ad24e0, type: 3}
+  - {fileID: 7145188791460633690, guid: 8942d13fa2a665a4fb784466f3d0bc69, type: 3}
+  - {fileID: 3487700839736674934, guid: 675907b8a1b8d6e4ea3ab619308e8bfa, type: 3}
+  spawnInterval: 5
+  spawnDelay: 5
+  yPos: 20
+  maxScoreables: 10
+  island: {fileID: 0}
+  spawnScoreables: 1
+  scoreablesOnScene: []
