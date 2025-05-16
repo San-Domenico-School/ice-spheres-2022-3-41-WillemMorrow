@@ -110,6 +110,8 @@ GameObject:
   - component: {fileID: 6183387667516148868}
   - component: {fileID: 6020609208087770429}
   - component: {fileID: 3500023968974430011}
+  - component: {fileID: 6025850401519080413}
+  - component: {fileID: 8170545031836008425}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -259,6 +261,7 @@ MonoBehaviour:
   focalPoint: {fileID: 0}
   powerUpIndicator: {fileID: 6183387667516148868}
   portalIgnoredLayers: 
+  playerAnimator: {fileID: 0}
 --- !u!114 &3500023968974430011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,3 +285,29 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &6025850401519080413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724788596557560788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d7a0519a260004598c4f18c83c4f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8170545031836008425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724788596557560788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4a323680f9e554791fbb91af4a965a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animateFalling: 0
+  playerAnimator: {fileID: 0}

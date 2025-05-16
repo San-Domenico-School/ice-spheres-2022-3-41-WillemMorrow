@@ -24,11 +24,13 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private Transform focalPoint;
     [SerializeField] private Light powerUpIndicator;
     [SerializeField] private int[] portalIgnoredLayers;
+
     private GameObject windmall;
 
     private Rigidbody rb;
     private GameObject player;
     private SphereCollider playerCollider;
+
     private PlayerInputActions playerInputActions;
     private Death death;
     private PlayerContainer containerClass;
@@ -38,6 +40,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 startPos;    
 
     public bool hasPowerUp {  get; private set; }
+    private bool grounded;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +78,7 @@ public class PlayerControler : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
+    // called when the player respawns.
     private void OnEnable()
     {
         AssignLevelValues();
@@ -92,10 +96,15 @@ public class PlayerControler : MonoBehaviour
     // assigns the player's values with those of the GameManager for the current level
     private void AssignLevelValues()
     {
+
         transform.localScale = GameManager.Singleton.playerScale;
-        rb.mass = GameManager.Singleton.playerMass;
-        rb.drag = GameManager.Singleton.playerDrag;
         moveForceMagnitude = (GameManager.Singleton.playerMoveForce) * 10;
+
+        if (rb != null)
+        {
+            rb.mass = GameManager.Singleton.playerMass;
+            rb.drag = GameManager.Singleton.playerDrag;
+        }
 
     }
 
@@ -110,7 +119,7 @@ public class PlayerControler : MonoBehaviour
         else
         {
             focalPoint = GameObject.Find("FocalPoint").transform;
-            Debug.Log($"focalpoint = {focalPoint.name}");
+            //Debug.Log($"focalpoint = {focalPoint.name}");
         }
     }
 
@@ -130,12 +139,26 @@ public class PlayerControler : MonoBehaviour
         }
     }*/
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            SwitchGrounded(true);
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            SwitchGrounded(false);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Portal") && !(portalIgnoredLayers.Contains<int>(gameObject.layer)))
         {
-            Debug.Log(gameObject.layer);
-
             gameObject.layer = LayerMask.NameToLayer("Portal");
         }
 
@@ -165,7 +188,7 @@ public class PlayerControler : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Player");
 
             // If, when the player leaves the portal, it is under the portal, IE it has gone through the portal,
-            if (transform.position.y < -1.0f)
+            if (transform.position.y < 0.0f)
             {
                 //get a reference to the playercontorler
                 PortalController portalController = other.GetComponent<PortalController>();
@@ -185,7 +208,13 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    /*
+    private void SwitchGrounded(bool onGround)
+    {
+        grounded = onGround;
+
+    }
+
+    /* coroutine "PowerUpCooldown" (handled by PowerUpManager now)       
     private IEnumerator powerUpCooldown(float cooldown)
     {
         hasPowerUp = true;

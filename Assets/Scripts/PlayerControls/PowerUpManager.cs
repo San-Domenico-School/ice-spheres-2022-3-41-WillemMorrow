@@ -83,15 +83,20 @@ public class PowerUpManager : MonoBehaviour
         StartCoroutine(PowerupCooldown());
     }
 
-    // coroutine responsible for "turning off" the powerup.
-    private IEnumerator PowerupCooldown()
+    public void RemovePowerUp()
     {
-        yield return new WaitForSeconds(powerupCooldown);
-
         Destroy(currentPowerup);
 
         currentPowerup = null;
         PowerupPrefab = null;
         hasPowerUp = false;
+    }
+
+    // coroutine responsible for "turning off" the powerup.
+    private IEnumerator PowerupCooldown()
+    {
+        yield return new WaitForSeconds(powerupCooldown);
+
+        RemovePowerUp();
     }
 }

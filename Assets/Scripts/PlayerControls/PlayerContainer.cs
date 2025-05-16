@@ -11,25 +11,29 @@ using UnityEngine.InputSystem.DualShock;
  * component of the playerContainer prefab.
  * 
  * Pacifica Morrow
- * 03.06.2025
+ * 04.22.2025
  * **************************************/
 
 public class PlayerContainer : MonoBehaviour
 {
     [Header("Editable Fields")]
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerModel;
+    
 
     public bool onRespawnCooldown; // if the player can respawn or not; if false, player can respawn.
-    private bool playerAlive;
+    private bool playerAlive; // whether the player is alive.
     
     // color fields
-    private bool colorChosen;
+    private bool colorChosen; // whether or not the color has been chosen, aka if the plaer has started.
     private int playerColor = 4; //defaults the player color to 4, or silver. see this.SetColorVector2() for details.
 
     private ColorPicker colorPicker; // reference to the colorpicker.
     private MaterialPicker materialPicker; // reference to the materialPicker of the player.
 
+    private Color playerColorColor; // the player's class color expressed as a type of Color.
 
+    // start.
     private void Start()
     {
         colorPicker = GetComponent<ColorPicker>();
@@ -38,6 +42,7 @@ public class PlayerContainer : MonoBehaviour
         GameManager.Singleton.totalPlayers++;
     }
 
+    // update()
     private void Update()
     {
         if (player.activeInHierarchy)
@@ -54,9 +59,6 @@ public class PlayerContainer : MonoBehaviour
     //called by Player Input component, sends vector2 to SetColorVector.
     public void OnColorAction(InputAction.CallbackContext ctx) => SetColorVector(ctx.ReadValue<Vector2>());
 
-    ///outdated -- string approach
-    // called by PlayerInput component, sends a string containing the button path (which button is pressed) to the SetColor method
-    //public void OnColorAction(InputAction.CallbackContext ctx) => SetColor(ctx.control.path);
 
     // Called by pressing the Start button; Start on controller, space on keyboard.
     public void OnStart(InputAction.CallbackContext ctx)
@@ -89,7 +91,7 @@ public class PlayerContainer : MonoBehaviour
     {
         if (!colorChosen && compositeXYAB != Vector2.zero)
         {
-            Debug.Log(compositeXYAB.ToString());
+            //Debug.Log(compositeXYAB.ToString());
 
             // switch statement deciding what to do given a Vector2.ToString (a vector2 expressed as a string)
             // click arrow to open
@@ -217,7 +219,10 @@ public class PlayerContainer : MonoBehaviour
         if (!onRespawnCooldown)
         {
             player.SetActive(true);
+            playerModel.SetActive(true);
             Debug.Log("Player Spawned!");
+
+            Scorekeeper.Singleton.UpdateScore(playerColor, 0);
         }
     }
 
@@ -228,13 +233,28 @@ public class PlayerContainer : MonoBehaviour
         player.SetActive(true);
 
         // sets the player's color.
-        Renderer renderer = player.GetComponentInChildren<Renderer>();
-        renderer.material.color = colorPicker.GetColor(playerColor);
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        playerColorColor = colorPicker.GetColor(playerColor);
         renderer.material = materialPicker.GetMaterial(playerColor);
     }
 
-    public GameObject GetPlayer()
+    public GameObject GetPlayer(int index)
     {
-        return player;
+        // switch statement getting 
+        switch (index.ToString())
+        {
+            case ("0"):
+                return player;
+            case ("1"):
+                return playerModel;
+            default:
+                return null;
+        }
+
+    }
+
+    public Color GetPlayerColor()
+    {
+        return playerColorColor;
     }
 }
