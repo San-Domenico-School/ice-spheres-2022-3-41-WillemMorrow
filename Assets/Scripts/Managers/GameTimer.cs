@@ -9,6 +9,7 @@ public class GameTimer : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI timeTxt;   //reference to the timer UI
     public int time;                                    //the time remaining in the game.
+    private bool gameStarted;
 
     private void Awake()
     {
@@ -25,15 +26,35 @@ public class GameTimer : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        // if the game has started already, end the method early.
+        if (gameStarted)
+        {
+            return;
+        }
+
+        // if there is one or more players alive, begin subtracting time.
+        if (GameManager.Singleton.alivePlayers >= 1)
+        {
+            //begin subtracting time.
+            InvokeRepeating("SubtractTime", 0, 1);
+
+            gameStarted = true;
+        }
+    }
+
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        DisplayTime(time.ToString(), "00");
 
         // multiply the time up to 60.
         time *= 60;
 
         //begin subtracting time.
-        InvokeRepeating("SubtractTime", 0, 1);
+        //InvokeRepeating("SubtractTime", 0, 1);
     }
 
     // subtract time and send the resultant string to DisplayTime();

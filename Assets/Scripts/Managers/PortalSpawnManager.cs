@@ -7,11 +7,12 @@ public class PortalSpawnManager : MonoBehaviour
     [Header("portal fields")]
     [SerializeField] private string portalDestination;
     [SerializeField] private float spawnHeight;
+    [SerializeField] private int scoreAdded;
     [SerializeField] GameObject portal;
 
     [Header("spawn requirements")]
-    [SerializeField] int scoreReq;
-    [SerializeField] int minTimeReq;
+    [SerializeField] private int scoreReq;
+    [SerializeField] private int timeReq;
     private bool portalSpawned;
 
     [Header("island")]
@@ -22,6 +23,9 @@ public class PortalSpawnManager : MonoBehaviour
     {
         // initializes the size of the island
         islandSize = island.GetComponent<MeshCollider>().bounds.size;
+
+        // makes sure the portal will open within timeReq minutes.
+        timeReq = (timeReq + GameTimer.Singleton.time);
     }
 
     // Update is called once per frame
@@ -34,10 +38,11 @@ public class PortalSpawnManager : MonoBehaviour
 
     private void CheckPortals()
     {
+        
         // check to see if any of the scores are above the required score for the level.
         foreach (int score in Scorekeeper.Singleton.playerScores)
         {
-            if (score > scoreReq)
+            if (score >= scoreReq)
             {
                 SpawnPortal();
                 portalSpawned = true;
@@ -45,10 +50,12 @@ public class PortalSpawnManager : MonoBehaviour
             }
         }
 
+        
+
         // if the time is under the time threshold for spawning a portal,
         int gameTime = ((GameTimer.Singleton.time / 60) + 1);
 
-        if (gameTime < minTimeReq)
+        if (gameTime < timeReq)
         {
             SpawnPortal();
             portalSpawned = true;
@@ -61,6 +68,7 @@ public class PortalSpawnManager : MonoBehaviour
         GameObject spawnedPortal = Instantiate(portal, SetRandomPosition(spawnHeight), portal.transform.rotation);
         PortalController portalScript = spawnedPortal.GetComponent<PortalController>();
 
+        portalScript.SetScore(scoreAdded);
         portalScript.SetDestination(portalDestination);
     }
 

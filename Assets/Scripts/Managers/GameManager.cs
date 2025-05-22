@@ -55,4 +55,27 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
     }
+
+    private void Start()
+    {
+        FindPlayers();
+    }
+
+    public void FindPlayers()
+    {
+        int alivePlayersCurrently = 0;
+
+        PlayerContainer[] totalPlayerGameObjects = GameObject.FindObjectsOfType<PlayerContainer>();
+        totalPlayers = totalPlayerGameObjects.Length;
+
+        foreach (PlayerContainer player in totalPlayerGameObjects)
+        {
+            if (!player.onRespawnCooldown)
+            {
+                alivePlayersCurrently++;
+            }
+        }
+
+        alivePlayers = alivePlayersCurrently;
+    }
 }
