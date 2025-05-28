@@ -14,6 +14,7 @@ public class PortalSpawnManager : MonoBehaviour
     [SerializeField] private int scoreReq;
     [SerializeField] private int timeReq;
     private bool portalSpawned;
+    private bool timeReqAssigned;
 
     [Header("island")]
     [SerializeField] GameObject island;
@@ -23,9 +24,6 @@ public class PortalSpawnManager : MonoBehaviour
     {
         // initializes the size of the island
         islandSize = island.GetComponent<MeshCollider>().bounds.size;
-
-        // makes sure the portal will open within timeReq minutes.
-        timeReq = (timeReq + GameTimer.Singleton.time);
     }
 
     // Update is called once per frame
@@ -36,9 +34,23 @@ public class PortalSpawnManager : MonoBehaviour
         CheckPortals();
     }
 
+    private void AssignTimeReq()
+    {
+        // makes sure the portal will open within timeReq minutes.
+        timeReq = (((GameTimer.Singleton.time / 60) + 1) - timeReq);
+
+        timeReqAssigned = true;
+    }
+
     private void CheckPortals()
     {
-        
+        // if the time requirement hasn't been initialized, initialize it.
+        // ensures that the timeReq isnt assigned before its supposed to be.
+        if (!timeReqAssigned && GameTimer.Singleton.gameStarted)
+        {
+            AssignTimeReq();
+        }
+
         // check to see if any of the scores are above the required score for the level.
         foreach (int score in Scorekeeper.Singleton.playerScores)
         {
@@ -50,10 +62,8 @@ public class PortalSpawnManager : MonoBehaviour
             }
         }
 
-        
-
         // if the time is under the time threshold for spawning a portal,
-        int gameTime = ((GameTimer.Singleton.time / 60) + 1);
+        int gameTime = (GameTimer.Singleton.time / 60);
 
         if (gameTime < timeReq)
         {

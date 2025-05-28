@@ -26,23 +26,26 @@ public class PlayerContainer : MonoBehaviour
     
     // color fields
     private bool colorChosen; // whether or not the color has been chosen, aka if the plaer has started.
-    private int playerColor = 4; //defaults the player color to 4, or silver. see this.SetColorVector2() for details.
+    private int playerColor = 4; //the player's class color expressed as an int. see this.SetColorVector() for details.
+    private Color playerColorColor; // the player's class color expressed as a type of Color.
 
     private ColorPicker colorPicker; // reference to the colorpicker.
     private MaterialPicker materialPicker; // reference to the materialPicker of the player.
+    public  PlayerAudio playerAudio; // reference to the player's audiosource manager class.
 
-    private Color playerColorColor; // the player's class color expressed as a type of Color.
 
-    // start.
+    // start(); called before first frame.
     private void Start()
     {
         colorPicker = GetComponent<ColorPicker>();
         materialPicker = GetComponent <MaterialPicker>();
+        playerAudio = GetComponent<PlayerAudio>();
+
         DontDestroyOnLoad(gameObject);
         GameManager.Singleton.totalPlayers++;
     }
 
-    // update()
+    // update(); called every frame.
     private void Update()
     {
         if (player.activeInHierarchy)
@@ -220,7 +223,7 @@ public class PlayerContainer : MonoBehaviour
         {
             player.SetActive(true);
             playerModel.SetActive(true);
-            Debug.Log("Player Spawned!");
+            //Debug.Log("Player Spawned!");
 
             Scorekeeper.Singleton.UpdateScore(playerColor, 0);
         }
@@ -230,12 +233,18 @@ public class PlayerContainer : MonoBehaviour
     // called by OnStart if player HASN'T selected a color
     private void StartPlayer()
     {
+        // enable the player
         player.SetActive(true);
 
         // sets the player's color.
         Renderer renderer = GetComponentInChildren<Renderer>();
         playerColorColor = colorPicker.GetColor(playerColor);
         renderer.material = materialPicker.GetMaterial(playerColor);
+
+        // sets the color of the player's light.
+        Light playerLight = GetComponentInChildren<Light>();
+        playerLight.color = playerColorColor;
+        Debug.Log(playerLight.gameObject.name);
     }
 
     public GameObject GetPlayer(int index)

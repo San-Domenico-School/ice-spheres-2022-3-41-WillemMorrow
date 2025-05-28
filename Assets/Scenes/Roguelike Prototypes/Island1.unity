@@ -1337,18 +1337,23 @@ PrefabInstance:
       objectReference: {fileID: 960243576}
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
+      propertyPath: timeReq
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
+        type: 3}
       propertyPath: scoreReq
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
       propertyPath: scoreAdded
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
       propertyPath: spawnHeight
-      value: 1
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}

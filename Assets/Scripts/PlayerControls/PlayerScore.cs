@@ -50,6 +50,10 @@ public class PlayerScore : MonoBehaviour
             //call the method on the scorekeeper to update the score.
             Scorekeeper.Singleton.UpdateScore(indexNum, scoreAdded);
 
+            PlayerAudio playerAudio = GetComponentInParent<PlayerAudio>();
+            playerAudio.playAudio("ScoreSFX");
+
+            //destroy the scoreable.
             Destroy(other.gameObject);
         }
     }

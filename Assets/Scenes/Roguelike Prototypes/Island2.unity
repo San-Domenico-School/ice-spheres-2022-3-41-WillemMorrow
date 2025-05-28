@@ -183,17 +183,22 @@ PrefabInstance:
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
       propertyPath: timeReq
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
       propertyPath: scoreReq
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
       propertyPath: minTimeReq
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
+        type: 3}
+      propertyPath: scoreAdded
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6263435359144594331, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
