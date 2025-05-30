@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58837294867865444886cd4a6ee8fca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 300
+  pushForce: 150
   cooldown: 1
   lightCooldown: 0.25
   lightOffIntensity: 24

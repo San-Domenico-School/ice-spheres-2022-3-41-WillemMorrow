@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae5650481185b84fbb71ea9050adf0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0
+  rotationSpeed: 6.5
 --- !u!1 &89534875
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +806,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6776436316188370743, guid: c201d395d44ad4b86ad88924cefcfd87,
+        type: 3}
+      propertyPath: bounceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: f3c90053f2c8944f0b7554b6be4e5fc0, type: 3}
     - target: {fileID: 6998871006393169201, guid: c201d395d44ad4b86ad88924cefcfd87,
         type: 3}
       propertyPath: m_Name
@@ -2820,6 +2825,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6776436316188370743, guid: c201d395d44ad4b86ad88924cefcfd87,
+        type: 3}
+      propertyPath: bounceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: f3c90053f2c8944f0b7554b6be4e5fc0, type: 3}
     - target: {fileID: 6998871006393169201, guid: c201d395d44ad4b86ad88924cefcfd87,
         type: 3}
       propertyPath: m_Name
@@ -3255,6 +3265,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6776436316188370743, guid: c201d395d44ad4b86ad88924cefcfd87,
+        type: 3}
+      propertyPath: bounceSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: f3c90053f2c8944f0b7554b6be4e5fc0, type: 3}
     - target: {fileID: 6998871006393169201, guid: c201d395d44ad4b86ad88924cefcfd87,
         type: 3}
       propertyPath: m_Name

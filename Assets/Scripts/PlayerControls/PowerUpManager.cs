@@ -12,7 +12,8 @@ using UnityEngine.InputSystem;
  * 
  * component of: the player container.
  * 
- * 
+ * Pacifica Morrow
+ * 30.05.2025
  * ****************************************/
 
 
@@ -67,6 +68,10 @@ public class PowerUpManager : MonoBehaviour
 
             PowerupPrefab = powerUpControler.GetPrefab();
             powerupCooldown = powerUpControler.GetCooldown();
+
+            //tell the player's audio to play the right SFX
+            PlayerAudio playerAudio = GetComponentInParent<PlayerAudio>();
+            playerAudio.playAudio("powerUpSFX");
 
             setPowerUp();
 

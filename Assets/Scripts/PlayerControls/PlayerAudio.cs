@@ -33,7 +33,11 @@ public class PlayerAudio : MonoBehaviour
             case ("scoreSFX"):
                 audioSource.PlayOneShot(scoreSFX);
                 break;
+
+            default:
+                Debug.LogWarning("The audio requested does not exist! Check spelling and capitalisation.");
+                break;
         }
-             
+
     }
 }

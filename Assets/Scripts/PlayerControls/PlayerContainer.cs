@@ -225,7 +225,15 @@ public class PlayerContainer : MonoBehaviour
             playerModel.SetActive(true);
             //Debug.Log("Player Spawned!");
 
+            //tell the player's audio to play the right SFX
+            playerAudio.playAudio("spawnSFX");
+
+            // tells the scorekeeper to display the player's score
+            // rather than the "press start" after the death cooldown.
             Scorekeeper.Singleton.UpdateScore(playerColor, 0);
+
+            Rigidbody playerRb = player.GetComponent<Rigidbody>();
+            playerRb.velocity = Vector3.zero;
         }
     }
 
@@ -245,6 +253,9 @@ public class PlayerContainer : MonoBehaviour
         Light playerLight = GetComponentInChildren<Light>();
         playerLight.color = playerColorColor;
         Debug.Log(playerLight.gameObject.name);
+
+        //tell the player's audio to play the right SFX
+        playerAudio.playAudio("spawnSFX");
     }
 
     public GameObject GetPlayer(int index)

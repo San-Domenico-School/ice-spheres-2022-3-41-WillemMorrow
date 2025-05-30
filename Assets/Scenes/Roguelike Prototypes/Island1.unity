@@ -1338,7 +1338,7 @@ PrefabInstance:
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
       propertyPath: timeReq
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1679591799655606582, guid: 6666e1a998134424c9cd5d034cd7c79b,
         type: 3}
