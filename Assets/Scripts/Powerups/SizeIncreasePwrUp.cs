@@ -53,6 +53,14 @@ public class SizeIncreasePwrUp : PowerUpBase
         StartCoroutine("PowerUpCntDwn");
     }
 
+    public void ResetPlayerSize()
+    {
+        playerCollider.radius = colliderRadius;
+        playerParent.layer = 06;
+        playerModel.transform.localScale = playerSize;
+        playerRb.mass = playerMass;
+    }
+
     // class that will be called when the player fires. 
     override public void OnPowerUpActivate()
     {
@@ -63,9 +71,6 @@ public class SizeIncreasePwrUp : PowerUpBase
     { 
         yield return new WaitForSeconds(PowerUpTimer);
 
-        playerCollider.radius = colliderRadius;
-        playerParent.layer = 06;
-        playerModel.transform.localScale = playerSize;
-        playerRb.mass = playerMass;
+        ResetPlayerSize();
     }
 }

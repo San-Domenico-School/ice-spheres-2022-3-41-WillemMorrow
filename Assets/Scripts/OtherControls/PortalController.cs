@@ -30,4 +30,9 @@ public class PortalController : MonoBehaviour
     {
         destination = desiredDestination;
     }
+
+    public void SetScore(int score)
+    {
+        scoreAdded = score;
+    }
 }

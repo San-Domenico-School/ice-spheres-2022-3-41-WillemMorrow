@@ -23,6 +23,7 @@ public class Death : MonoBehaviour
 
     private int indexNum;
 
+
     // sets fields upon the player joining.
     private void Start()
     {
@@ -58,9 +59,21 @@ public class Death : MonoBehaviour
         // reduces the number of alive players in the MameGanager.
         GameManager.Singleton.alivePlayers--;
 
-        // disables all powerups.
+
+        // disables all powerups. ******************************
+        // gets a reference to the player's PowerUpManager.
         PowerUpManager playerPowerupManager = playerContainer.GetComponentInChildren<PowerUpManager>();
+
+        //if the player is big, call the growpowerup's resetPlayerSize function.
+        if (playerContainer.GetComponentInChildren<SizeIncreasePwrUp>() != null)
+        {
+            SizeIncreasePwrUp growPwrUp = playerContainer.GetComponentInChildren<SizeIncreasePwrUp>();
+            growPwrUp.ResetPlayerSize();
+        }
+
+        //actually removes the powerups.
         playerPowerupManager.RemovePowerUp();
+        //*******************************************************
 
         // disables the player, simulating death.
         playerModel.SetActive(false);
@@ -74,7 +87,7 @@ public class Death : MonoBehaviour
 
         Debug.Log($"Player {playerModel.name} has Died!");
     }
-    
+
     // subtracts 1 from the player's respawn timer every time its envoked, until the respawn timer is 0. 
     private void RespawnCountdown()
     {
@@ -84,6 +97,8 @@ public class Death : MonoBehaviour
             respawnCountdown--;
 
             Scorekeeper.Singleton.UpdateDeathTimer(indexNum, respawnCountdown);
+
+            Debug.Log($"deathTimer for {playerModel.name} has been called!");
         }
 
         // if countdown below zero: cancel the counting down, reset the timer, and cancelinvoke the method.
@@ -91,6 +106,7 @@ public class Death : MonoBehaviour
         {
             CancelInvoke("RespawnCountdown");
 
+            //resets the respawn countdown
             respawnCountdown = respawnCooldown;
 
             // sets the onRespawnCooldown in the PLAYER CONTAINER to false. Player can now respawn.
